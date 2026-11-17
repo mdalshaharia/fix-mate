@@ -11,6 +11,9 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { useSession } from "@/lib/auth-client";
+// import { getTokenFromServer } from "@/lib/getTokenFromServer";
+import { getTokenFromClient } from "@/lib/getTokenFromClient";
 // import { getAuthHeader, useCurrentUser } from "@/lib/useCurrentUser";
 
 const MIN_PROBLEM_LENGTH = 20;
@@ -29,7 +32,7 @@ export default function BookingForm({ serviceId, isAvailable }) {
 //   const { user, loading } = useCurrentUser();
      const {
           data: user,
-          isPending
+          isPending:loading
       } = useSession();
 
   const [form, setForm] = useState({ phone: "", address: "", problem: "" });
@@ -78,7 +81,7 @@ export default function BookingForm({ serviceId, isAvailable }) {
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/bookings`, {
         method: "POST",
-        headers: { "Content-Type": "application/json", ...(await getAuthHeader()) },
+        headers: { "Content-Type": "application/json", ...(await getTokenFromClient()) },
         body: JSON.stringify({
           serviceId,
           customerPhone: form.phone.trim(),
@@ -163,21 +166,23 @@ export default function BookingForm({ serviceId, isAvailable }) {
       <div className="space-y-1.5">
         <Label htmlFor="date">Preferred date</Label>
         <Popover open={calendarOpen} onOpenChange={setCalendarOpen}>
-          <PopoverTrigger asChild>
-            <Button
-              id="date"
-              type="button"
-              variant="outline"
-              className="w-full justify-between font-normal"
-              aria-invalid={!!errors.date}
-            >
-              <span className={date ? "" : "text-muted-foreground"}>
-                {date
-                  ? date.toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" })
-                  : "Select a date"}
-              </span>
-              <CalendarIcon className="size-4 text-muted-foreground" />
-            </Button>
+          <PopoverTrigger
+            render={
+              <Button
+                id="date"
+                type="button"
+                variant="outline"
+                className="w-full justify-between font-normal"
+                aria-invalid={!!errors.date}
+              />
+            }
+          >
+            <span className={date ? "" : "text-muted-foreground"}>
+              {date
+                ? date.toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" })
+                : "Select a date"}
+            </span>
+            <CalendarIcon className="size-4 text-muted-foreground" />
           </PopoverTrigger>
           <PopoverContent className="w-auto p-0" align="start">
             <Calendar

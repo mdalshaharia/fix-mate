@@ -18,7 +18,7 @@ export async function getServices(params) {
 }
 
 export async function getService(id) {
-  const res = await fetch(`${process.env.API_URL}/services/${id}`, {
+  const res = await fetch(`${process.env.SERVER_BASE_URL}/services/${id}`, {
     cache: "no-store",
   });
 

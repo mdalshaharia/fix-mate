@@ -38,8 +38,13 @@ export default function ServiceCard({ service }) {
 
         <p className="mt-auto text-base font-bold">From ${basePrice}</p>
 
-        <Button asChild variant="secondary" size="sm" className="w-full text-primary">
-          <Link href={`/services/${_id}`}>View details</Link>
+        <Button
+          render={<Link href={`/services/${_id}`} />}
+          variant="secondary"
+          size="sm"
+          className="w-full text-primary"
+        >
+          View details
         </Button>
       </div>
     </article>
