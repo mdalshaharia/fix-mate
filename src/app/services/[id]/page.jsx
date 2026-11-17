@@ -103,7 +103,7 @@ export default async function ServiceDetailsPage({ params }) {
 
         {/* Right: request form */}
         <aside className="lg:sticky lg:top-6 lg:self-start">
-          <BookingForm serviceId={String(_id)} isAvailable={isAvailable} />
+          <BookingForm service={service} isAvailable={isAvailable} />
         </aside>
       </div>
     </main>
