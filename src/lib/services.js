@@ -16,3 +16,13 @@ export async function getServices(params) {
   if (!res.ok) throw new Error("Failed to load services");
   return res.json();
 }
+
+export async function getService(id) {
+  const res = await fetch(`${process.env.API_URL}/services/${id}`, {
+    cache: "no-store",
+  });
+
+  if (res.status === 404) return null;
+  if (!res.ok) throw new Error("Failed to load service");
+  return res.json();
+}

@@ -25,6 +25,7 @@ export default function RootLayout({ children }) {
     >
       <body className="min-h-full flex flex-col">
         <Toaster></Toaster>
+        {/* <Toaster richColors /> */}
         {children}
         </body>
     </html>
