@@ -39,7 +39,7 @@ function Logo({
             <Clapperboard className="h-5 w-5" />
         </span>
         <span className="text-xl font-extrabold tracking-tight text-heading">
-            Fix<span className="text-[#E64833]">Mate</span>
+            Fix<span className="text-[#E64833]">Mte</span>
         </span>
     </Link>;
 }
