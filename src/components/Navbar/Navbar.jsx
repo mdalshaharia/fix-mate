@@ -110,10 +110,10 @@ function NavbarInner() {
                                     Logout
                                 </button>
                             </div> : <div className="grid gap-2">
-                                <SheetClose nativeButton={false} render={<Link href="/signin" className="btn btn-outline rounded-xl border-slate-300 font-semibold text-slate-800 hover:border-slate-400 hover:bg-slate-100 dark:border-white/20 dark:bg-transparent dark:text-foreground dark:hover:border-white/40 dark:hover:bg-white/5" />}>
+                                <SheetClose nativeButton={false} render={<Link href="/sign-in" className="btn btn-outline rounded-xl border-slate-300 font-semibold text-slate-800 hover:border-slate-400 hover:bg-slate-100 dark:border-white/20 dark:bg-transparent dark:text-foreground dark:hover:border-white/40 dark:hover:bg-white/5" />}>
                                     Login
                                 </SheetClose>
-                                <SheetClose nativeButton={false} render={<Link href="/signup" className="btn rounded-xl border-none bg-[#E64833] font-semibold text-white shadow-sm shadow-[#E64833]/25 hover:bg-[#cf3e2b]" />}>
+                                <SheetClose nativeButton={false} render={<Link href="/sign-up" className="btn rounded-xl border-none bg-[#E64833] font-semibold text-white shadow-sm shadow-[#E64833]/25 hover:bg-[#cf3e2b]" />}>
                                     Register
                                 </SheetClose>
                             </div>}
@@ -185,14 +185,14 @@ function NavbarInner() {
                         </DropdownMenuItem>
                     </DropdownMenuContent>
                 </DropdownMenu> : <>
-                    <Link href="/signin" className="btn btn-ghost hidden rounded-xl px-4 text-sm font-semibold text-slate-700 hover:bg-slate-100 hover:text-[#244855] sm:inline-flex transition dark:text-foreground dark:hover:bg-white/5">
+                    <Link href="/sign-in" className="btn btn-ghost hidden rounded-xl px-4 text-sm font-semibold text-slate-700 hover:bg-slate-100 hover:text-[#244855] sm:inline-flex transition dark:text-foreground dark:hover:bg-white/5">
                         Login
                     </Link>
-                    <Link href="/signup" className="btn hidden rounded-full border-none bg-[#E64833] px-5 text-sm font-semibold text-white shadow-sm shadow-[#E64833]/25 hover:bg-[#cf3e2b] hover:shadow-md hover:shadow-[#E64833]/35 sm:inline-flex transition-all">
+                    <Link href="/sign-up" className="btn hidden rounded-full border-none bg-[#E64833] px-5 text-sm font-semibold text-white shadow-sm shadow-[#E64833]/25 hover:bg-[#cf3e2b] hover:shadow-md hover:shadow-[#E64833]/35 sm:inline-flex transition-all">
                         Register
                     </Link>
                     { }
-                    <Link href="/signin" className="btn btn-sm rounded-full border-none bg-[#E64833] text-xs font-semibold text-white shadow-2xs hover:bg-[#cf3e2b] sm:hidden">
+                    <Link href="/sign-in" className="btn btn-sm rounded-full border-none bg-[#E64833] text-xs font-semibold text-white shadow-2xs hover:bg-[#cf3e2b] sm:hidden">
                         Login
                     </Link>
                 </>}
