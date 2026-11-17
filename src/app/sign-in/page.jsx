@@ -6,7 +6,6 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "sonner";
 import { Eye, EyeOff, Loader2 } from "lucide-react";
-import { signUp, signIn } from "../lib/auth-client";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { AlertTriangle } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -15,6 +14,7 @@ import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Separator } from "@/components/ui/separator";
 import Navbar from "@/components/Navbar/Navbar";
+import { signIn, signUp } from "@/lib/auth-client";
 import { LoaderScreen } from "@/components/Skeletons";
 function GoogleIcon() {
   return <svg viewBox="0 0 24 24" className="h-4 w-4" aria-hidden>
@@ -62,7 +62,7 @@ function SignIn() {
         setTimeout(() => {
           router.push(redirectPath);
           router.refresh();
-        }, 3000);
+        }, 800);
       }
       if (error) {
         if (error.code === "INVALID_EMAIL_OR_PASSWORD" || error.message === "Invalid email or password") {
@@ -193,7 +193,7 @@ function SignIn() {
 
                     <p className="mt-6 text-sm text-muted-foreground">
                         New to StudioSpace?{" "}
-                        <Link href='/signup' className="font-semibold text-[#E64833] transition hover:text-[#cf3e2b]">
+                        <Link href='/sign-up' className="font-semibold text-[#E64833] transition hover:text-[#cf3e2b]">
                             Create an account
                         </Link>
                     </p>

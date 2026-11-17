@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "sonner";
-import { Circle, CircleCheck, Eye, EyeOff, Loader2 } from "lucide-react";
+import { Circle, CircleCheck, Eye, EyeOff, Loader2, User, Wrench } from "lucide-react";
 // import { signUp, signIn } from "../lib/auth-client";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { AlertTriangle } from "lucide-react";
@@ -45,9 +45,19 @@ export default function RegisterPage() {
             </div>
         </main>;
 }
+const roles = [{
+  value: "customer",
+  label: "Customer",
+  icon: User
+}, {
+  value: "technician",
+  label: "Technician",
+  icon: Wrench
+}];
 function Register() {
   const router = useRouter();
   const [agree, setAgree] = useState(false);
+  const [role, setRole] = useState("customer");
   const [password, setPassword] = useState("");
   const [showPw, setShowPw] = useState(false);
   const [errors, setErrors] = useState({});
@@ -55,8 +65,11 @@ function Register() {
   const [googleLoading, setGoogleLoading] = useState(false);
   const busy = loading || googleLoading;
   const rules = useMemo(() => passwordRules(password), [password]);
+
+  
   const handleSubmit = async e => {
     e.preventDefault();
+    console.log(errors)
     const formData = new FormData(e.currentTarget);
     const ResData = Object.fromEntries(formData.entries());
     if (!rules.every(r => r.ok)) {
@@ -76,10 +89,12 @@ function Register() {
         name: ResData.name,
         email: ResData.email,
         password: ResData.password,
+        role,
       });
+      console.log(data, err)
       if (data?.token || data?.user) {
         toast.success("Registration successful, please sign in");
-        router.push('/signin');
+        router.push('/sign-in');
       }
       if (error) {
         const friendly = {
@@ -93,10 +108,7 @@ function Register() {
         });
         return;
       }
-    } catch (err) {
-      setErrors({
-        form: "Something went wrong. Please try again."
-      });
+    } catch (error) {
     } finally {
       setLoading(false);
     }
@@ -143,6 +155,21 @@ function Register() {
                     <Field id="name" label="Full name" error={errors.name}>
                         <Input id="name" autoComplete="name" placeholder="Your full name" disabled={busy} aria-invalid={!!errors.name} className={inputCls} name="name" />
                     </Field>
+
+                    {}
+                    <div className="space-y-1.5">
+                        <Label className="text-xs font-semibold text-[#E64833]">I am a</Label>
+                        <div className="grid grid-cols-2 gap-3" role="radiogroup" aria-label="Account role">
+                            {roles.map(r => {
+              const Icon = r.icon;
+              const selected = role === r.value;
+              return <button key={r.value} type="button" role="radio" aria-checked={selected} disabled={busy} onClick={() => setRole(r.value)} className={`flex flex-col items-center gap-1.5 rounded-xl border p-4 text-center transition ${selected ? "border-[#E64833] bg-[#E64833]/5 ring-1 ring-[#E64833]/60" : "border-border bg-muted/50 hover:border-foreground/20"}`}>
+                                    <Icon className={`h-5 w-5 ${selected ? "text-[#E64833]" : "text-muted-foreground"}`} />
+                                    <span className={`text-sm font-semibold ${selected ? "text-[#E64833]" : "text-foreground"}`}>{r.label}</span>
+                                </button>;
+            })}
+                        </div>
+                    </div>
 
                     {}
                     <Field id="email" label="Email" error={errors.email}>
@@ -220,7 +247,7 @@ function Register() {
 
                 <p className="mt-6 text-sm text-muted-foreground">
                     Already have an account?{" "}
-                    <Link href={`/signin`} className="font-semibold text-[#E64833] transition hover:text-[#cf3e2b]">
+                    <Link href={`/sign-in`} className="font-semibold text-[#E64833] transition hover:text-[#cf3e2b]">
                         Sign in
                     </Link>
                 </p>

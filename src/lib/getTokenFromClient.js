@@ -24,7 +24,7 @@ async function handleExpiredSession() {
     await authClient.signOut();
   } catch {}
   toast.error("Your session has expired. Please sign in again.");
-  window.location.href = "/signin";
+  window.location.href = "/sign-in";
 }
 export async function authorizedFetch(url, options = {}) {
   const token = await getTokenFromClient();

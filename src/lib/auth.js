@@ -3,12 +3,21 @@ import { MongoClient } from "mongodb";
 import { mongodbAdapter } from "@better-auth/mongo-adapter";
 import { jwt } from "better-auth/plugins";
 const client = new MongoClient(process.env.DB_URL);
-const db = client.db('studio-space');
+const db = client.db('fix-mate');
 export const auth = betterAuth({
   trustedOrigins: ["http://localhost:3000", "https://studio-space-ivory.vercel.app"],
   emailAndPassword: {
     enabled: true,
     autoSignIn: false
+  },
+  user: {
+    additionalFields: {
+      role: {
+        type: ["customer", "technician", "admin"],
+        input: true,
+        defaultValue: "customer",
+      },
+    },
   },
   socialProviders: {
     google: {

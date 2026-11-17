@@ -1,0 +1,18 @@
+const PAGE_SIZE = 8;
+
+export async function getServices(params) {
+  const qs = new URLSearchParams();
+
+  // Only forward the params the API understands
+  ["search", "category", "serviceMode", "sort", "page"].forEach((key) => {
+    if (typeof params[key] === "string" && params[key]) qs.set(key, params[key]);
+  });
+  qs.set("limit", PAGE_SIZE);
+
+  const res = await fetch(`${process.env.SERVER_BASE_URL}/services?${qs}`, {
+    cache: "no-store", // always fresh results
+  });
+
+  if (!res.ok) throw new Error("Failed to load services");
+  return res.json();
+}
