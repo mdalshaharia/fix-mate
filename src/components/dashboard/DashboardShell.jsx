@@ -5,18 +5,23 @@ import { usePathname, useRouter } from "next/navigation";
 import { Sheet, SheetContent, SheetTitle } from "@/components/ui/sheet";
 import SidebarNav from "@/components/dashboard/SidebarNav";
 import Topbar from "@/components/dashboard/Topbar";
-import { useCurrentUser } from "@/lib/useCurrentUser";
-import { MENU } from "@/lib/dashboardMenu";
+// import { useCurrentUser } from "@/lib/useCurrentUser";
+import { MENU } from "./dashboardMenu";
+import { useSession } from "@/lib/auth-client";
+// import { MENU } from "@/lib/dashboardMenu";
 
 export default function DashboardShell({ children }) {
   const router = useRouter();
   const pathname = usePathname();
-  const { user, loading } = useCurrentUser();
+//   const { user, loading } = useCurrentUser();
+  const { data: user, isPending: loading } = useSession();
+//   const user = session?.user;
   const [menuOpen, setMenuOpen] = useState(false);
 
   // Each role only sees its own area: /dashboard/customer, /dashboard/technician, ...
-  const home = user && MENU[user.role] ? `/dashboard/${user.role}` : null;
+  const home = user?.user && MENU[user?.user?.role] ? `/dashboard/${user?.user.role}` : null;
   const allowed = !!home && (pathname === home || pathname.startsWith(`${home}/`));
+//   console.log(home, allowed)
 
   useEffect(() => {
     if (loading) return;
@@ -37,19 +42,19 @@ export default function DashboardShell({ children }) {
     <div className="min-h-screen bg-muted/30">
       {/* Desktop sidebar */}
       <aside className="fixed inset-y-0 left-0 z-40 hidden w-64 border-r bg-card lg:block">
-        <SidebarNav role={user.role} />
+        <SidebarNav role={user?.user.role} />
       </aside>
 
       {/* Mobile / tablet sidebar */}
       <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
         <SheetContent side="left" className="w-64 p-0">
           <SheetTitle className="sr-only">Navigation menu</SheetTitle>
-          <SidebarNav role={user.role} onNavigate={() => setMenuOpen(false)} />
+          <SidebarNav role={user?.user.role} onNavigate={() => setMenuOpen(false)} />
         </SheetContent>
       </Sheet>
 
       <div className="lg:pl-64">
-        <Topbar user={user} onMenuClick={() => setMenuOpen(true)} />
+        <Topbar user={user.user} onMenuClick={() => setMenuOpen(true)} />
         <main className="p-4 sm:p-6">{children}</main>
       </div>
     </div>

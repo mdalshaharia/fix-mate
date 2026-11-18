@@ -2,14 +2,13 @@ import { toast } from "sonner";
 import { authClient } from "./auth-client";
 export const getTokenFromClient = async () => {
   try {
-    const {
-      data,
-      error
-    } = await authClient.token();
-    if (error) {
-      console.error("Failed to retrieve token:", error);
+    const res = await fetch("/api/auth/token", {
+      credentials: "include",
+    });
+    if (!res.ok) {
       return null;
     }
+    const data = await res.json();
     return data?.token || null;
   } catch (err) {
     console.error("Error fetching token:", err);
@@ -26,6 +25,7 @@ async function handleExpiredSession() {
   toast.error("Your session has expired. Please sign in again.");
   window.location.href = "/sign-in";
 }
+
 export async function authorizedFetch(url, options = {}) {
   const token = await getTokenFromClient();
   if (!token) {
@@ -33,7 +33,10 @@ export async function authorizedFetch(url, options = {}) {
     throw new Error("session-expired; sign-in in progress");
   }
   await storeTokenCookie(token);
-  const res = await fetch(url, {
+  const fullUrl = url.startsWith("http")
+    ? url
+    : `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}${url}`;
+  const res = await fetch(fullUrl, {
     ...options,
     credentials: "include",
     headers: {
@@ -41,6 +44,7 @@ export async function authorizedFetch(url, options = {}) {
       Authorization: `Bearer ${token}`
     }
   });
+  console.log(res, 'response from cookie parser')
   if (res.status === 401) {
     await handleExpiredSession();
     throw new Error("session-expired; sign-in in progress");
@@ -51,7 +55,7 @@ let cookieStored = false;
 async function storeTokenCookie(token) {
   if (cookieStored) return;
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_URI}/auth/login`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/auth/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -62,5 +66,7 @@ async function storeTokenCookie(token) {
       })
     });
     if (res.ok) cookieStored = true;
-  } catch {}
+  } catch (err) {
+    console.error("Failed to store token cookie:", err);
+  }
 }

@@ -19,16 +19,16 @@ const NAV_LINKS = [{
     label: "About",
     href: "/about"
 }];
-const USER_MENU =  [{
-    label: "Dashboard",
-    href: "/dashboard",
-    icon: LayoutDashboard
-}, {
-    label: "Updxate Profile",
-    href: "/update-profile",
-    icon: CloudUpload
-}
-];
+// const USER_MENU =  [{
+//     label: "Dashboard",
+//     href: `/dashboard/${}`,
+//     icon: LayoutDashboard
+// }, {
+//     label: "Updxate Profile",
+//     href: "/update-profile",
+//     icon: CloudUpload
+// }
+// ];
 const isActive = (pathname, href) => href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(href + "/");
 const initials = (name = "") => name.split(" ").filter(Boolean).slice(0, 2).map(n => n[0]?.toUpperCase()).join("") || "U";
 function Logo({
@@ -58,6 +58,17 @@ function NavbarInner() {
         router.push("/");
         router.refresh();
     };
+
+    const USER_MENU =  [{
+    label: "Dashboard",
+    href: `/dashboard/${session?.user?.role}`,
+    icon: LayoutDashboard
+}, {
+    label: "Updxate Profile",
+    href: "/update-profile",
+    icon: CloudUpload
+}
+];
     return <header className="sticky top-0 z-50 border-b border-border bg-background/90 backdrop-blur-md shadow-xs transition-colors duration-200">
         <nav className="navbar mx-auto min-h-16 max-w-7xl px-4 sm:px-6 lg:px-8">
             { }

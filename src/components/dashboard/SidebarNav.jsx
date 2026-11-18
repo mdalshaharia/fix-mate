@@ -4,7 +4,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Wrench } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { MENU, MENU_TITLE } from "@/lib/dashboardMenu";
+import { MENU ,MENU_TITLE} from "./dashboardMenu";
+// import { MENU, MENU_TITLE } from "@/lib/dashboardMenu";
 
 export default function SidebarNav({ role, onNavigate }) {
   const pathname = usePathname();

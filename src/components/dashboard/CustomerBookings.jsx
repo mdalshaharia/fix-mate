@@ -25,9 +25,10 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import PageHeader from "@/components/dashboard/PageHeader";
-import { PaymentBadge, StatusBadge } from "@/components/dashboard/StatusBadge";
-import { apiFetch } from "@/lib/api";
+// import { apiFetch } from "@/lib/api";
+import PageHeader from "../utils/dashboard/PageHeader";
+import { PaymentBadge, StatusBadge } from "../utils/dashboard/StatusBadge";
+import { authorizedFetch } from "@/lib/getTokenFromClient";
 
 // Dates are saved at UTC midnight, so format in UTC to avoid showing the wrong day
 const formatDate = (value) =>
@@ -99,20 +100,23 @@ export default function CustomerBookings({ payment }) {
   const [cancelling, setCancelling] = useState(false);
   const [payingId, setPayingId] = useState(null);
 
-  const loadBookings = useCallback(async () => {
-    try {
-      setBookings(await apiFetch("/bookings/my"));
-      setError("");
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
-    }
-  }, []);
+useEffect(() => {
+  const api = "/bookings/my";
+  setLoading(true);
 
-  useEffect(() => {
-    loadBookings();
-  }, [loadBookings]);
+  authorizedFetch(api)
+    .then((res) => res.json())
+    .then((data) => {
+      setBookings(data);
+    })
+    .catch((error) => {
+      setError(error.message);
+      toast.error(error.message);
+    })
+    .finally(() => {
+      setLoading(false); // Runs on both success and failure
+    });
+}, []);
 
   // Coming back from Stripe Checkout (fixed id stops duplicate toasts in dev strict mode)
   useEffect(() => {
@@ -130,7 +134,7 @@ export default function CustomerBookings({ payment }) {
   async function confirmCancel() {
     setCancelling(true);
     try {
-      await apiFetch(`/bookings/${cancelTarget._id}/cancel`, { method: "PATCH" });
+      await authorizedFetch(`/bookings/${cancelTarget._id}/cancel`, { method: "PATCH" });
       setBookings((prev) =>
         prev.map((b) => (b._id === cancelTarget._id ? { ...b, status: "cancelled" } : b))
       );
