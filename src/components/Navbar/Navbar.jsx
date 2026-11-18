@@ -19,7 +19,7 @@ const NAV_LINKS = [{
     label: "About",
     href: "/about"
 }];
-const USER_MENU = [{
+const USER_MENU =  [{
     label: "Dashboard",
     href: "/dashboard",
     icon: LayoutDashboard
