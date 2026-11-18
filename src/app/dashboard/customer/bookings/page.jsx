@@ -1,4 +1,4 @@
-import CustomerBookings from "@/components/dashboard/customer/CustomerBookings";
+import CustomerBookings from "@/components/dashboard/CustomerBookings";
 
 export const metadata = { title: "My bookings" };
 

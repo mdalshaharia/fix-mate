@@ -3,8 +3,8 @@
 import { useEffect, useState } from "react";
 import { CheckCircle2, ClipboardList, Hammer } from "lucide-react";
 import { toast } from "sonner";
-import PageHeader from "@/components/dashboard/PageHeader";
-import StatsCard from "@/components/dashboard/StatsCard";
+import PageHeader from "@/components/utils/dashboard/PageHeader";
+import StatsCard from "@/components/utils/dashboard/StatsCard";
 import { apiFetch } from "@/lib/api";
 
 export default function CustomerOverviewPage() {
