@@ -91,7 +91,7 @@ function BookingActions({ booking, payingId, onCancel, onPay }) {
   return null; // a paid booking shows the Paid badge instead of a button
 }
 
-export default function CustomerBookings({ payment }) {
+export default function CustomerBookings({ payment, sessionId }) {
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -100,36 +100,75 @@ export default function CustomerBookings({ payment }) {
   const [cancelling, setCancelling] = useState(false);
   const [payingId, setPayingId] = useState(null);
 
-useEffect(() => {
-  const api = "/bookings/my";
-  setLoading(true);
-
-  authorizedFetch(api)
-    .then((res) => res.json())
-    .then((data) => {
+  const loadBookings = useCallback(async () => {
+    try {
+      const res = await authorizedFetch("/bookings/my");
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(data.message || "Failed to load bookings");
+      setError("");
       setBookings(data);
-    })
-    .catch((error) => {
-      setError(error.message);
-      toast.error(error.message);
-    })
-    .finally(() => {
-      setLoading(false); // Runs on both success and failure
-    });
-}, []);
-
-  // Coming back from Stripe Checkout (fixed id stops duplicate toasts in dev strict mode)
-  useEffect(() => {
-    if (payment === "success") {
-      toast.success("Payment successful", {
-        id: "payment-result",
-        description: "Your booking will show as Paid in a few seconds.",
-      });
+    } catch (err) {
+      setError(err.message);
+      toast.error(err.message);
+    } finally {
+      setLoading(false);
     }
+  }, []);
+
+  useEffect(() => {
+    if (payment === "success") return;
+
+    let cancelled = false;
+    queueMicrotask(() => {
+      if (!cancelled) loadBookings();
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [loadBookings, payment]);
+
+  // Coming back from Stripe Checkout: verify the session, then refresh the list.
+  useEffect(() => {
+    if (!payment) return;
+
     if (payment === "cancelled") {
       toast.info("Payment cancelled. You can try again anytime.", { id: "payment-result" });
+      return;
     }
-  }, [payment]);
+
+    if (payment !== "success") return;
+
+    let active = true;
+
+    async function confirmPayment() {
+      try {
+        if (sessionId) {
+          const res = await authorizedFetch(
+            `/payments/verify?session_id=${encodeURIComponent(sessionId)}`
+          );
+          const data = await res.json().catch(() => ({}));
+          if (!res.ok) throw new Error(data.message || "Could not verify payment");
+        }
+
+        if (!active) return;
+        await loadBookings();
+        toast.success("Payment successful", {
+          id: "payment-result",
+          description: "Your booking is now marked as paid.",
+        });
+      } catch (err) {
+        if (!active) return;
+        await loadBookings();
+        if (!active) return;
+        toast.error(err.message, { id: "payment-result" });
+      }
+    }
+
+    confirmPayment();
+    return () => {
+      active = false;
+    };
+  }, [payment, sessionId, loadBookings]);
 
   async function confirmCancel() {
     setCancelling(true);
@@ -151,11 +190,18 @@ useEffect(() => {
   async function handlePay(booking) {
     setPayingId(booking._id);
     try {
-      const { url } = await apiFetch("/payments/checkout", {
+      const res = await authorizedFetch("/payments/checkout", {
         method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ bookingId: booking._id }),
       });
-      window.location.href = url; // go to Stripe Checkout
+      const data = await res.json().catch(() => ({}));
+
+      if (!res.ok || !data.url) {
+        throw new Error(data.message || "Could not start payment");
+      }
+
+      window.location.assign(data.url); // go to Stripe Checkout
     } catch (err) {
       toast.error(err.message);
       setPayingId(null);

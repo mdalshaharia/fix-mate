@@ -12,8 +12,6 @@ import { Textarea } from "@/components/ui/textarea";
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { useSession } from "@/lib/auth-client";
-// import { getTokenFromServer } from "@/lib/getTokenFromServer";
-import { getTokenFromClient } from "@/lib/getTokenFromClient";
 // import { getAuthHeader, useCurrentUser } from "@/lib/useCurrentUser";
 
 const MIN_PROBLEM_LENGTH = 20;
@@ -34,7 +32,6 @@ export default function BookingForm({ service, isAvailable }) {
         data: user,
         isPending: loading
     } = useSession();
-    console.log(user)
 
     const [form, setForm] = useState({ phone: "", address: "", problem: "" });
     const [date, setDate] = useState();
@@ -79,9 +76,9 @@ export default function BookingForm({ service, isAvailable }) {
         if (!validate()) return;
 
         setSubmitting(true);
-        console.log(`http://localhost:5000/bookings`)
+        // console.log(`http://localhost:5000/bookings`)
         try {
-            const res = await fetch(`http://localhost:5000/bookings`, {
+            const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/bookings`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -100,7 +97,7 @@ export default function BookingForm({ service, isAvailable }) {
                     address: form.address.trim(),
                     preferredDate: toDateString(date),
                     problemDescription: form.problem.trim(),
-                    status: "pending",
+                    status: "requested",
                     finalAmount: service.basePrice,
                     paymentStatus: "unpaid",
                 }),
