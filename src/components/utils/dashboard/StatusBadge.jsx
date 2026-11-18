@@ -31,3 +31,18 @@ export function PaymentBadge({ paymentStatus }) {
     </Badge>
   );
 }
+
+const APPROVAL = {
+  pending: { label: "Pending approval", className: "bg-amber-100 text-amber-700" },
+  approved: { label: "Approved", className: "bg-green-100 text-green-700" },
+  rejected: { label: "Rejected", className: "bg-red-100 text-red-700" },
+};
+
+export function ApprovalBadge({ approvalStatus }) {
+  const { label, className } = APPROVAL[approvalStatus] || APPROVAL.pending;
+  return (
+    <Badge variant="secondary" className={cn("font-medium", className)}>
+      {label}
+    </Badge>
+  );
+}
