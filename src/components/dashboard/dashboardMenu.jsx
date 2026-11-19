@@ -17,14 +17,14 @@ export const MENU = {
     { label: "Overview", href: "/dashboard/customer", icon: LayoutDashboard, end: true },
     { label: "My Bookings", href: "/dashboard/customer/bookings", icon: CalendarCheck },
     { label: "Payments", href: "/dashboard/customer/payments", icon: CreditCard },
-    { label: "Profile", href: "/dashboard/customer/profile", icon: User },
+    { label: "Profile", href: "/dashboard/profile", icon: User },
   ],
   technician: [
     { label: "Overview", href: "/dashboard/technician", icon: LayoutDashboard, end: true },
     { label: "My Services", href: "/dashboard/technician/services", icon: Wrench },
     { label: "Add Service", href: "/dashboard/technician/add-service", icon: PlusCircle },
     { label: "Job Requests", href: "/dashboard/technician/requests", icon: ClipboardList },
-    { label: "Profile", href: "/dashboard/technician/profile", icon: User },
+    { label: "Profile", href: "/dashboard/profile", icon: User },
   ],
   admin: [
     { label: "Overview", href: "/dashboard/admin", icon: LayoutDashboard, end: true },
@@ -32,6 +32,7 @@ export const MENU = {
     { label: "Manage Services", href: "/dashboard/admin/services", icon: Wrench },
     { label: "All Bookings", href: "/dashboard/admin/bookings", icon: ListChecks },
     { label: "Transactions", href: "/dashboard/admin/transactions", icon: CreditCard },
+    { label: "Profile", href: "/dashboard/profile", icon: User },
   ],
 };
 

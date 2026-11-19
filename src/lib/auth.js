@@ -20,6 +20,9 @@ export const auth = betterAuth({
         input: true,
         defaultValue: "customer",
       },
+      phone: { type: "string", required: false },
+      area: { type: "string", required: false },
+      bio: { type: "string", required: false },
     },
   },
   databaseHooks: {
@@ -35,11 +38,15 @@ export const auth = betterAuth({
         }),
       },
       update: {
-        before: async (user) => {
-          // Role is server-owned: strip it from any better-auth updateUser path.
-          const { role: _role, ...rest } = user;
-          return { data: rest };
-        },
+        // SECURITY: a user must never be able to change their own role from the client
+        before: async ({ role, ...data }) => ({
+          data: {
+            ...data,
+            ...(typeof data.phone === "string" && { phone: data.phone.trim().slice(0, 20) }),
+            ...(typeof data.area === "string" && { area: data.area.trim().slice(0, 100) }),
+            ...(typeof data.bio === "string" && { bio: data.bio.trim().slice(0, 300) }),
+          },
+        }),
       },
     },
   },
