@@ -11,8 +11,8 @@ import {
 } from "lucide-react";
 
 // `end: true` means the link is active only on the exact path.
-// The customer links are built in this task; the technician and admin links are
-// placeholders for the pages you will send next, so change the hrefs freely.
+// Note: customer/technician "Profile" and admin "All Bookings" links may not
+// have pages yet — they are role-gated by DashboardShell regardless.
 export const MENU = {
   customer: [
     { label: "Overview", href: "/dashboard/customer", icon: LayoutDashboard, end: true },
