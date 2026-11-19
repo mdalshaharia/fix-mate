@@ -13,9 +13,33 @@ export const auth = betterAuth({
   user: {
     additionalFields: {
       role: {
-        type: ["customer", "technician", "admin"],
+        // "string" (not an array) so better-auth can actually validate;
+        // input stays true so the sign-up form can still pick technician.
+        // databaseHooks below make "admin" impossible via self-signup.
+        type: "string",
         input: true,
         defaultValue: "customer",
+      },
+    },
+  },
+  databaseHooks: {
+    user: {
+      create: {
+        before: async (user) => ({
+          data: {
+            ...user,
+            // Only customer/technician via signup; admins are promoted later
+            // through the admin dashboard (or a one-time DB update).
+            role: user.role === "technician" ? "technician" : "customer",
+          },
+        }),
+      },
+      update: {
+        before: async (user) => {
+          // Role is server-owned: strip it from any better-auth updateUser path.
+          const { role: _role, ...rest } = user;
+          return { data: rest };
+        },
       },
     },
   },

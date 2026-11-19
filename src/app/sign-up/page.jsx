@@ -69,7 +69,6 @@ function Register() {
   
   const handleSubmit = async e => {
     e.preventDefault();
-    console.log(errors)
     const formData = new FormData(e.currentTarget);
     const ResData = Object.fromEntries(formData.entries());
     if (!rules.every(r => r.ok)) {
@@ -91,7 +90,6 @@ function Register() {
         password: ResData.password,
         role,
       });
-      console.log(data, err)
       if (data?.token || data?.user) {
         toast.success("Registration successful, please sign in");
         router.push('/sign-in');

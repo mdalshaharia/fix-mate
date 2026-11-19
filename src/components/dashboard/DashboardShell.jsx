@@ -5,23 +5,18 @@ import { usePathname, useRouter } from "next/navigation";
 import { Sheet, SheetContent, SheetTitle } from "@/components/ui/sheet";
 import SidebarNav from "@/components/dashboard/SidebarNav";
 import Topbar from "@/components/dashboard/Topbar";
-// import { useCurrentUser } from "@/lib/useCurrentUser";
 import { MENU } from "./dashboardMenu";
 import { useSession } from "@/lib/auth-client";
-// import { MENU } from "@/lib/dashboardMenu";
 
 export default function DashboardShell({ children }) {
   const router = useRouter();
   const pathname = usePathname();
-//   const { user, loading } = useCurrentUser();
   const { data: user, isPending: loading } = useSession();
-//   const user = session?.user;
   const [menuOpen, setMenuOpen] = useState(false);
 
   // Each role only sees its own area: /dashboard/customer, /dashboard/technician, ...
   const home = user?.user && MENU[user?.user?.role] ? `/dashboard/${user?.user.role}` : null;
   const allowed = !!home && (pathname === home || pathname.startsWith(`${home}/`));
-//   console.log(home, allowed)
 
   useEffect(() => {
     if (loading) return;
