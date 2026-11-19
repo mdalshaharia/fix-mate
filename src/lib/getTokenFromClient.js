@@ -44,7 +44,6 @@ export async function authorizedFetch(url, options = {}) {
       Authorization: `Bearer ${token}`
     }
   });
-  console.log(res, 'response from cookie parser')
   if (res.status === 401) {
     await handleExpiredSession();
     throw new Error("session-expired; sign-in in progress");

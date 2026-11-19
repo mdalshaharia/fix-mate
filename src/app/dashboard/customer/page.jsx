@@ -5,20 +5,30 @@ import { CheckCircle2, ClipboardList, Hammer } from "lucide-react";
 import { toast } from "sonner";
 import PageHeader from "@/components/utils/dashboard/PageHeader";
 import StatsCard from "@/components/utils/dashboard/StatsCard";
-// import { apiFetch } from "@/lib/api";
 import { authorizedFetch } from "@/lib/getTokenFromClient";
 
 export default function CustomerOverviewPage() {
     const [stats, setStats] = useState(null);
 
     useEffect(() => {
-        const api = "/bookings/my/stats";
-        authorizedFetch(api)
-            .then((res) => res.json())
-            .then(setStats)
-            .catch((error) => toast.error(error.message));
+        let ignore = false;
+        (async () => {
+            try {
+                const res = await authorizedFetch("/bookings/my/stats");
+                const data = await res.json().catch(() => null);
+                if (ignore) return;
+                if (!res.ok) throw new Error(data?.message || "Failed to load stats");
+                setStats(data);
+            } catch (error) {
+                if (!ignore && !error.message?.includes("session-expired")) {
+                    toast.error(error.message);
+                }
+            }
+        })();
+        return () => {
+            ignore = true;
+        };
     }, []);
-    console.log(stats)
 
     const cards = [
         { label: "Total Requests", value: stats?.totalRequests, icon: ClipboardList },

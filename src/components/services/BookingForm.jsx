@@ -12,7 +12,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { useSession } from "@/lib/auth-client";
-// import { getAuthHeader, useCurrentUser } from "@/lib/useCurrentUser";
+import { authorizedFetch } from "@/lib/getTokenFromClient";
 
 const MIN_PROBLEM_LENGTH = 20;
 const PHONE_REGEX = /^\+?[0-9\s-]{7,15}$/;
@@ -27,7 +27,6 @@ function toDateString(date) {
 export default function BookingForm({ service, isAvailable }) {
     const router = useRouter();
     const pathname = usePathname();
-    //   const { user, loading } = useCurrentUser();
     const {
         data: user,
         isPending: loading
@@ -76,9 +75,8 @@ export default function BookingForm({ service, isAvailable }) {
         if (!validate()) return;
 
         setSubmitting(true);
-        // console.log(`http://localhost:5000/bookings`)
         try {
-            const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/bookings`, {
+            const res = await authorizedFetch("/bookings", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -91,15 +89,10 @@ export default function BookingForm({ service, isAvailable }) {
                     basePrice: service.basePrice,
                     technicianName: service.technicianName,
                     technicianEmail: service.technicianEmail,
-                    customerName: user?.user?.name || "",
-                    customerEmail: user?.user?.email || "",
                     customerPhone: form.phone.trim(),
                     address: form.address.trim(),
                     preferredDate: toDateString(date),
                     problemDescription: form.problem.trim(),
-                    status: "requested",
-                    finalAmount: service.basePrice,
-                    paymentStatus: "unpaid",
                 }),
             });
             const data = await res.json().catch(() => ({}));
@@ -112,13 +105,18 @@ export default function BookingForm({ service, isAvailable }) {
 
             toast.success("Repair request sent!", {
                 description: "The technician will review and respond soon.",
-                action: { label: "My Bookings", onClick: () => router.push("/my-bookings") },
+                action: {
+                    label: "My Bookings",
+                    onClick: () => router.push("/dashboard/customer/bookings"),
+                },
             });
             setForm({ phone: "", address: "", problem: "" });
             setDate(undefined);
             setErrors({});
-        } catch {
-            toast.error("Network error. Please try again.");
+        } catch (err) {
+            if (!err.message?.includes("session-expired")) {
+                toast.error("Network error. Please try again.");
+            }
         } finally {
             setSubmitting(false);
         }
