@@ -15,8 +15,10 @@ export default function DashboardShell({ children }) {
   const [menuOpen, setMenuOpen] = useState(false);
 
   // Each role only sees its own area: /dashboard/customer, /dashboard/technician, ...
+  // /dashboard/profile is shared by every role.
   const home = user?.user && MENU[user?.user?.role] ? `/dashboard/${user?.user.role}` : null;
-  const allowed = !!home && (pathname === home || pathname.startsWith(`${home}/`));
+  const isProfile = pathname === "/dashboard/profile" || pathname.startsWith("/dashboard/profile/");
+  const allowed = !!home && (isProfile || pathname === home || pathname.startsWith(`${home}/`));
 
   useEffect(() => {
     if (loading) return;

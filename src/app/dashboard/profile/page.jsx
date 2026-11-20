@@ -1,3 +1,4 @@
+import ProfileView from "@/components/dashboard/ProfileView";
 import PageHeader from "@/components/utils/dashboard/PageHeader";
 
 export const metadata = { title: "Update profile" };

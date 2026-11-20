@@ -12,7 +12,7 @@ import { Label } from "@/components/ui/label";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Textarea } from "@/components/ui/textarea";
 import { authClient, useSession } from "@/lib/auth-client";
-// import { uploadImage } from "@/lib/uploadImage";
+import { uploadImageToImgBB } from "@/lib/uploadImage";
 import { cn } from "@/lib/utils";
 
 const ALLOWED_TYPES = ["image/jpeg", "image/png"];
@@ -48,10 +48,15 @@ function ProfileForm({ user }) {
   const router = useRouter();
 
   // Values currently saved; Cancel goes back to these
-  const saved = { name: user.name, phone: user.phone, area: user.area, bio: user.bio };
+  const saved = {
+    name: user.name ?? "",
+    phone: user.phone ?? "",
+    area: user.area ?? "",
+    bio: user.bio ?? "",
+  };
 
   const [form, setForm] = useState(saved);
-  const [image, setImage] = useState(user.image);
+  const [image, setImage] = useState(user.image ?? "");
   const [uploading, setUploading] = useState(false);
   const [saving, setSaving] = useState(false);
   const [errors, setErrors] = useState({});
@@ -77,7 +82,7 @@ function ProfileForm({ user }) {
 
     setUploading(true);
     try {
-      setImage(await uploadImage(file));
+      setImage(await uploadImageToImgBB(file));
       toast.success("Photo uploaded. Click Save Changes to keep it.");
     } catch (error) {
       toast.error(error.message || "Image upload failed");
@@ -120,7 +125,7 @@ function ProfileForm({ user }) {
 
   function handleCancel() {
     setForm(saved);
-    setImage(user.image);
+    setImage(user.image ?? "");
     setErrors({});
   }
 
@@ -248,7 +253,8 @@ function ProfileForm({ user }) {
 
 // Waits for the session, then gives the form the saved values to start from
 export default function ProfileView() {
-  const { data:user, isPending:loading } = useSession();
+  const { data: session, isPending: loading } = useSession();
+  const user = session?.user;
 
   if (loading || !user) return <Skeleton className="h-96 w-full rounded-2xl" />;
   return <ProfileForm user={user} />;

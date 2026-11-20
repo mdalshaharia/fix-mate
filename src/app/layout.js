@@ -1,6 +1,7 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Inter, Roboto, Lato } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "sonner";
+import Footer from "@/components/Footer/Footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -9,6 +10,23 @@ const geistSans = Geist({
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
+
+const inter = Inter({
+  variable: "--font-inter",
+  subsets: ["latin"],
+});
+
+const roboto = Roboto({
+  variable: "--font-roboto",
+  weight: ["300", "400", "500", "700", "900"],
+  subsets: ["latin"],
+});
+
+const lato = Lato({
+  variable: "--font-lato",
+  weight: ["300", "400", "700", "900"],
   subsets: ["latin"],
 });
 
@@ -21,12 +39,13 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${inter.variable} ${roboto.variable} ${lato.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
         <Toaster></Toaster>
         {/* <Toaster richColors /> */}
         {children}
+        <Footer></Footer>
         </body>
     </html>
   );

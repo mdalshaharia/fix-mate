@@ -11,7 +11,6 @@ import {
 } from "lucide-react";
 
 // `end: true` means the link is active only on the exact path.
-// Note: customer/technician "Profile" links may not have pages yet.
 export const MENU = {
   customer: [
     { label: "Overview", href: "/dashboard/customer", icon: LayoutDashboard, end: true },

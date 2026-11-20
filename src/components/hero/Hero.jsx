@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 // Edit the content here without touching the markup
-const SLIDES = ["/banner-1.png", "/banner-2.png", "/banner-3.png"];
+const SLIDES = ["/banner-5.jpg", "/banner-6.jpg", "/banner-7.jpg", "/banner-4.jpg"];
 const SLIDE_INTERVAL = 5000; // ms
 
 const CONTENT = {
