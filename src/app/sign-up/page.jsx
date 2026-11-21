@@ -34,7 +34,7 @@ function GoogleIcon() {
             <path fill="#EA4335" d="M12 10.2v3.9h5.5c-.2 1.3-1.6 3.9-5.5 3.9-3.3 0-6-2.7-6-6s2.7-6 6-6c1.9 0 3.1.8 3.8 1.5l2.6-2.5C16.8 3.4 14.6 2.4 12 2.4 6.7 2.4 2.4 6.7 2.4 12s4.3 9.6 9.6 9.6c5.5 0 9.2-3.9 9.2-9.4 0-.6-.1-1.1-.2-1.6H12z" />
         </svg>;
 }
-const inputCls = "h-11 rounded-xl border-border bg-muted/50 text-foreground placeholder:text-muted-foreground focus-visible:ring-[#E64833]/60";
+const inputCls = "h-11 rounded-xl border-border bg-muted/50 text-foreground placeholder:text-muted-foreground focus-visible:ring-primary/60";
 export default function RegisterPage() {
   return <main className="flex min-h-screen flex-col bg-background text-foreground">
             <Navbar />
@@ -156,14 +156,14 @@ function Register() {
 
                     {}
                     <div className="space-y-1.5">
-                        <Label className="text-xs font-semibold text-[#E64833]">I am a</Label>
+                        <Label className="text-xs font-semibold text-primary">I am a</Label>
                         <div className="grid grid-cols-2 gap-3" role="radiogroup" aria-label="Account role">
                             {roles.map(r => {
               const Icon = r.icon;
               const selected = role === r.value;
-              return <button key={r.value} type="button" role="radio" aria-checked={selected} disabled={busy} onClick={() => setRole(r.value)} className={`flex flex-col items-center gap-1.5 rounded-xl border p-4 text-center transition ${selected ? "border-[#E64833] bg-[#E64833]/5 ring-1 ring-[#E64833]/60" : "border-border bg-muted/50 hover:border-foreground/20"}`}>
-                                    <Icon className={`h-5 w-5 ${selected ? "text-[#E64833]" : "text-muted-foreground"}`} />
-                                    <span className={`text-sm font-semibold ${selected ? "text-[#E64833]" : "text-foreground"}`}>{r.label}</span>
+              return <button key={r.value} type="button" role="radio" aria-checked={selected} disabled={busy} onClick={() => setRole(r.value)} className={`flex flex-col items-center gap-1.5 rounded-xl border p-4 text-center transition ${selected ? "border-primary bg-primary/5 ring-1 ring-primary/60" : "border-border bg-muted/50 hover:border-foreground/20"}`}>
+                                    <Icon className={`h-5 w-5 ${selected ? "text-primary" : "text-muted-foreground"}`} />
+                                    <span className={`text-sm font-semibold ${selected ? "text-primary" : "text-foreground"}`}>{r.label}</span>
                                 </button>;
             })}
                         </div>
@@ -207,14 +207,14 @@ function Register() {
                 ...p,
                 agree: undefined
               }));
-            }} disabled={busy} className="mt-0.5 border-border data-[state=checked]:border-[#E64833] data-[state=checked]:bg-[#E64833] data-[state=checked]:text-white" />
+            }} disabled={busy} className="mt-0.5 border-border data-[state=checked]:border-primary data-[state=checked]:bg-primary data-[state=checked]:text-white" />
                             <Label htmlFor="agree" className="cursor-pointer text-xs font-normal leading-relaxed text-muted-foreground">
                                 I agree to the{" "}
-                                <Link href="/terms" className="font-semibold text-[#E64833] hover:text-[#cf3e2b]">
+                                <Link href="/terms" className="font-semibold text-primary hover:text-primary/80">
                                     Terms
                                 </Link>{" "}
                                 and{" "}
-                                <Link href="/privacy" className="font-semibold text-[#E64833] hover:text-[#cf3e2b]">
+                                <Link href="/privacy" className="font-semibold text-primary hover:text-primary/80">
                                     Privacy Policy
                                 </Link>
                                 .
@@ -223,7 +223,7 @@ function Register() {
                         {errors.agree && <p className="mt-1.5 text-xs text-red-600">{errors.agree}</p>}
                     </div>
 
-                    <Button type="submit" disabled={busy} className="h-11 w-full rounded-xl bg-[#E64833] font-semibold text-white shadow-sm shadow-[#E64833]/25 hover:bg-[#cf3e2b]">
+                    <Button type="submit" disabled={busy} className="h-11 w-full rounded-xl bg-primary font-semibold text-white shadow-sm shadow-primary/25 hover:bg-primary/80">
                         {loading ? <>
                                 <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Creating account…
                             </> : "Create account"}
@@ -245,7 +245,7 @@ function Register() {
 
                 <p className="mt-6 text-sm text-muted-foreground">
                     Already have an account?{" "}
-                    <Link href={`/sign-in`} className="font-semibold text-[#E64833] transition hover:text-[#cf3e2b]">
+                    <Link href={`/sign-in`} className="font-semibold text-primary transition hover:text-primary/80">
                         Sign in
                     </Link>
                 </p>
@@ -259,7 +259,7 @@ function Field({
   children
 }) {
   return <div className="space-y-1.5">
-            <Label htmlFor={id} className="text-xs font-semibold text-[#E64833]">
+            <Label htmlFor={id} className="text-xs font-semibold text-primary">
                 {label}
             </Label>
             {children}

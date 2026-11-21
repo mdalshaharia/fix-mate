@@ -9,6 +9,7 @@ import {
   Wrench,
 } from "lucide-react";
 import { CATEGORIES } from "@/components/utils/services/constants";
+// import {WHY_IMAGE} from '../../../public/trust-img.webp'
 
 // Display text per category. Keys must match the category values in lib/constants.js.
 const CATEGORY_TEXT = {
@@ -22,7 +23,7 @@ const CATEGORY_TEXT = {
 };
 
 
-const WHY_IMAGE = null;
+const WHY_IMAGE = '/public/trust-img.webp';
 
 // Edit the feature cards here without touching the markup
 const FEATURES = [
@@ -102,8 +103,7 @@ export default function CategoriesAndTrust() {
       {/* Why choose us */}
       <section aria-labelledby="why-title" className="bg-background">
         <div className="mx-auto max-w-6xl px-4 pt-16 sm:pt-24">
-          <p className="flex items-center gap-3 text-sm font-medium uppercase tracking-widest">
-            <span aria-hidden="true" className="h-px w-10 bg-primary/50" />
+          <p className="text-sm font-semibold uppercase tracking-widest text-primary">
             Why choose us
           </p>
           <h2 id="why-title" className="mt-2 text-3xl font-bold tracking-tight sm:text-4xl">

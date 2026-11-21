@@ -13,8 +13,8 @@ const SLIDE_INTERVAL = 5000; // ms
 const CONTENT = {
   title: "We Can Fix That",
   subtitle: "Broken smartphone, laptop, AC or fridge? Book a verified technician in minutes.",
-  primary: { label: "Browse Services", href: "/services" },
-  secondary: { label: "Become a Technician", href: "/sign-up" },
+  // primary: { label: "Browse Services", href: "/services" },
+  // secondary: { label: "Become a Technician", href: "/sign-up" },
 };
 
 export default function Hero() {
@@ -79,16 +79,13 @@ export default function Hero() {
           className="hero-fade-up flex flex-wrap justify-center gap-3"
           style={{ animationDelay: "0.4s" }}
         >
-          <Button asChild size="lg">
-            <Link href={CONTENT.primary.href}>{CONTENT.primary.label}</Link>
-          </Button>
           <Button
             asChild
             size="lg"
             variant="outline"
-            className="border-white/40 bg-transparent text-white hover:bg-white/10 hover:text-white"
+            className="border-white/40 rounded-full text-lg p-5 bg-transparent text-white hover:bg-white/10 hover:text-white"
           >
-            <Link href={CONTENT.secondary.href}>{CONTENT.secondary.label}</Link>
+            <Link href='/services'>Browse Services</Link>
           </Button>
         </div>
       </div>

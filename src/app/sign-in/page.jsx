@@ -130,19 +130,19 @@ function SignIn() {
                     <form onSubmit={handleSubmit} noValidate className="mt-6 space-y-4">
                         {}
                         <div className="space-y-1.5">
-                            <Label htmlFor="email" className="text-xs font-semibold text-[#E64833]">
+                            <Label htmlFor="email" className="text-xs font-semibold text-primary">
                                 Email
                             </Label>
-                            <Input id="email" type="email" name="email" autoComplete="email" placeholder="you@email.com" disabled={busy} className="h-11 rounded-xl border-border bg-muted/50 text-foreground placeholder:text-muted-foreground focus-visible:ring-[#E64833]/60" />
+                            <Input id="email" type="email" name="email" autoComplete="email" placeholder="you@email.com" disabled={busy} className="h-11 rounded-xl border-border bg-muted/50 text-foreground placeholder:text-muted-foreground focus-visible:ring-primary/60" />
                         </div>
 
                         {}
                         <div className="space-y-1.5">
-                            <Label htmlFor="password" className="text-xs font-semibold text-[#E64833]">
+                            <Label htmlFor="password" className="text-xs font-semibold text-primary">
                                 Password
                             </Label>
                             <div className="relative">
-                                <Input id="password" type={showPassword ? "text" : "password"} name="password" autoComplete="current-password" placeholder="Your password" disabled={busy} className="h-11 rounded-xl border-border bg-muted/50 pr-11 text-foreground placeholder:text-muted-foreground focus-visible:ring-[#E64833]/60" />
+                                <Input id="password" type={showPassword ? "text" : "password"} name="password" autoComplete="current-password" placeholder="Your password" disabled={busy} className="h-11 rounded-xl border-border bg-muted/50 pr-11 text-foreground placeholder:text-muted-foreground focus-visible:ring-primary/60" />
                                 <button type="button" onClick={() => setShowPassword(s => !s)} aria-label={showPassword ? "Hide password" : "Show password"} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground transition hover:text-foreground/85">
                                     {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                                 </button>
@@ -158,18 +158,18 @@ function SignIn() {
                         {}
                         <div className="flex items-center justify-between gap-3">
                             <div className="flex items-center gap-2">
-                                <Checkbox id="remember" checked={remember} onCheckedChange={v => setRemember(v === true)} disabled={busy} className="border-border data-[state=checked]:border-[#E64833] data-[state=checked]:bg-[#E64833] data-[state=checked]:text-white" />
+                                <Checkbox id="remember" checked={remember} onCheckedChange={v => setRemember(v === true)} disabled={busy} className="border-border data-[state=checked]:border-primary data-[state=checked]:bg-primary data-[state=checked]:text-white" />
                                 <Label htmlFor="remember" className="cursor-pointer text-xs font-normal text-muted-foreground">
                                     Remember me
                                 </Label>
                             </div>
-                            <button type="button" onClick={handleReset} disabled={busy || resetLoading} className="text-xs font-semibold text-[#E64833] transition hover:text-[#cf3e2b] disabled:opacity-50">
+                            <button type="button" onClick={handleReset} disabled={busy || resetLoading} className="text-xs font-semibold text-primary transition hover:text-primary/80 disabled:opacity-50">
                                 {resetLoading ? "Sending…" : "Forgot password?"}
                             </button>
                         </div>
 
                         {}
-                        <Button type="submit" disabled={busy} className="h-11 w-full rounded-xl bg-[#E64833] font-semibold text-white shadow-sm shadow-[#E64833]/25 hover:bg-[#cf3e2b]">
+                        <Button type="submit" disabled={busy} className="h-11 w-full rounded-xl bg-primary font-semibold text-white shadow-sm shadow-primary/25 hover:bg-primary/80">
                             {loading ? <>
                                     <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Signing in…
                                 </> : "Sign in"}
@@ -193,7 +193,7 @@ function SignIn() {
 
                     <p className="mt-6 text-sm text-muted-foreground">
                         New to StudioSpace?{" "}
-                        <Link href='/sign-up' className="font-semibold text-[#E64833] transition hover:text-[#cf3e2b]">
+                        <Link href='/sign-up' className="font-semibold text-primary transition hover:text-primary/80">
                             Create an account
                         </Link>
                     </p>

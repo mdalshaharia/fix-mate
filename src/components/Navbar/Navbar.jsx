@@ -43,8 +43,8 @@ function Logo({
         <span className={`grid h-10 w-10 place-items-center rounded-xl transition-transform duration-200 group-hover:scale-105 ${onDark ? "bg-white/10 text-white ring-1 ring-white/20" : "bg-brand-primary/10 text-brand-primary dark:bg-brand-primary-lighter dark:text-brand-primary-foreground"}`}>
             <Wrench className="h-5 w-5" />
         </span>
-        <span className={`text-2xl font-extrabold tracking-tight ${onDark ? "text-white" : "text-brand-primary dark:text-foreground"}`}>
-            Fix<span className="text-brand-secondary">Mate</span>
+        <span className={`font-pacifico text-2xl font-extrabold tracking-tight ${onDark ? "text-white" : "text-brand-primary dark:text-foreground"}`}>
+            Fix<span className= "font-pacifico text-brand-secondary">Mate</span>
         </span>
     </Link>;
 }

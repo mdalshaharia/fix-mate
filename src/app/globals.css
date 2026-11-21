@@ -84,6 +84,8 @@
   --brand-accent: #c9513f;            /* Warm accent derived from secondary */
   --brand-accent-light: #d4695a;      /* Lighter accent for hovers */
 
+  --font-pacifico: var(--font-pacifico);
+
   /* ═══════════════════════════════════════════════════════
      Shadcn/Tailwind Design Tokens (derived from brand)
      ═══════════════════════════════════════════════════════ */
