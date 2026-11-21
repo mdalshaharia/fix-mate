@@ -6,6 +6,7 @@ import HowItWorks from "@/components/howItWorks/HowItWorks";
 import Navbar from "@/components/Navbar/Navbar";
 import { SkeletonCard } from "@/components/Skeletons";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Footer } from "react-day-picker";
 
 function FeaturedServicesFallback() {
   return (
@@ -30,6 +31,7 @@ function FeaturedServicesFallback() {
 export default function Home() {
   return (
     <div>
+     
       <Navbar></Navbar>
       <Hero></Hero>
       <CategoriesAndTrust></CategoriesAndTrust>
@@ -37,6 +39,7 @@ export default function Home() {
         <FeaturedServices />
       </Suspense>
       <HowItWorks></HowItWorks>
+      <Footer></Footer>
     </div>
   );
 }
