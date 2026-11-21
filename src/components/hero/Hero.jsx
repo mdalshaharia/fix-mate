@@ -83,7 +83,7 @@ export default function Hero() {
             asChild
             size="lg"
             variant="outline"
-            className="border-white/40 rounded-full text-lg p-5 bg-transparent text-white hover:bg-white/10 hover:text-white"
+            className="border-white/40 rounded-full text-sm p-6 bg-transparent text-white hover:bg-white/10 hover:text-white"
           >
             <Link href='/services'>Browse Services</Link>
           </Button>

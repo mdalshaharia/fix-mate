@@ -9,6 +9,7 @@ import {
   Wrench,
 } from "lucide-react";
 import { CATEGORIES } from "@/components/utils/services/constants";
+import AlternatingTimeline from "../Timeline/AlternatingTimeline";
 // import {WHY_IMAGE} from '../../../public/trust-img.webp'
 
 // Display text per category. Keys must match the category values in lib/constants.js.
@@ -23,7 +24,7 @@ const CATEGORY_TEXT = {
 };
 
 
-const WHY_IMAGE = '/public/trust-img.webp';
+// const WHY_IMAGE = '/public/trust-img.webp';
 
 // Edit the feature cards here without touching the markup
 const FEATURES = [
@@ -102,7 +103,7 @@ export default function CategoriesAndTrust() {
 
       {/* Why choose us */}
       <section aria-labelledby="why-title" className="bg-background">
-        <div className="mx-auto max-w-6xl px-4 pt-16 sm:pt-24">
+        <div className="mx-auto max-w-6xl px-4 pt-10 sm:pt-12">
           <p className="text-sm font-semibold uppercase tracking-widest text-primary">
             Why choose us
           </p>
@@ -112,37 +113,29 @@ export default function CategoriesAndTrust() {
 
           <div className="mt-10 grid items-stretch gap-6 lg:grid-cols-[1fr_1fr]">
             {/* Feature cards */}
-            <ul className="grid gap-4 sm:grid-cols-2">
-              {FEATURES.map(({ icon: Icon, title }) => (
-                <li
-                  key={title}
-                  className="flex items-center gap-4 rounded-xl border bg-card p-5 shadow-sm transition-shadow hover:shadow-md"
-                >
-                  <span className="flex size-14 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
-                    <Icon className="size-7" strokeWidth={1.75} />
-                  </span>
-                  <h3 className="font-semibold leading-snug">{title}</h3>
-                </li>
-              ))}
-            </ul>
+            <AlternatingTimeline items={FEATURES} />
 
             {/* Image panel with banner */}
             <div className="relative min-h-72 overflow-hidden rounded-2xl bg-gradient-to-br from-primary/10 to-primary/30">
-              {WHY_IMAGE ? (
-                <Image
-                  src={WHY_IMAGE}
-                  alt="FixMate technicians at work"
-                  fill
-                  sizes="(min-width: 1024px) 50vw, 100vw"
-                  className="object-cover"
-                />
-              ) : (
-                <Wrench
-                  aria-hidden="true"
-                  className="absolute left-1/2 top-[42%] size-28 -translate-x-1/2 -translate-y-1/2 text-primary/40"
-                  strokeWidth={1.25}
-                />
-              )}
+
+              {/* Mobile & Tablet Image */}
+              <Image
+                src="/trust-img-7.png"
+                alt="FixMate technicians at work"
+                fill
+                sizes="100vw"
+                className="object-cover lg:hidden"
+              />
+
+              {/* Desktop Image */}
+              <Image
+                src="/trust-img-7-lg.png"
+                alt="FixMate technicians at work"
+                fill
+                sizes="50vw"
+                className="hidden object-cover lg:block"
+              />
+
 
               <div className="absolute inset-x-0 bottom-0 flex items-center gap-3 bg-gradient-to-r from-primary to-primary/70 px-5 py-4 text-primary-foreground">
                 <span className="flex size-9 items-center justify-center rounded-full bg-white/20">
@@ -156,15 +149,45 @@ export default function CategoriesAndTrust() {
 
         {/* Stats strip */}
         {STAT_TILES.length > 0 && (
-          <div className="mt-16 bg-muted/60 sm:mt-24">
-            <dl className="mx-auto grid max-w-6xl divide-y px-4 py-10 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
-              {STAT_TILES.map(({ value, label }) => (
-                <div key={label} className="px-4 py-6 text-center sm:py-2">
-                  <dd className="text-4xl font-medium tracking-tight sm:text-5xl">{value}</dd>
-                  <dt className="mt-2 text-muted-foreground sm:text-lg">{label}</dt>
-                </div>
-              ))}
-            </dl>
+          <div className="mx-auto mt-16 max-w-6xl px-4 sm:mt-24">
+            <div className="relative overflow-hidden rounded-3xl border border-brand-primary/15 bg-gradient-to-br from-white via-brand-primary/[0.02] to-brand-secondary/[0.03] shadow-[0_20px_50px_-15px_rgba(21,65,90,0.12)]">
+              {/* Subtle Top Gradient Accent Line */}
+              <div
+                aria-hidden="true"
+                className="h-1 w-full bg-brand-primary/[0.01]"
+              />
+
+              <dl className="grid divide-y divide-brand-primary/10 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
+                {STAT_TILES.map(({ value, label }, index) => {
+                  const isSecondary = index === 1;
+
+                  return (
+                    <div
+                      key={label}
+                      className="group relative flex flex-col items-center justify-center px-6 py-9 text-center transition-colors duration-300 hover:bg-brand-primary/[0.025] sm:py-11"
+                    >
+                      {/* Small Indicator Pill */}
+                      <span
+                        aria-hidden="true"
+                        className={`mb-3 h-1.5 w-6 rounded-full transition-all duration-300 group-hover:w-10 ${isSecondary ? "bg-brand-secondary/70" : "bg-brand-primary/70"
+                          }`}
+                      />
+
+                      <dd
+                        className={`font-extrabold tracking-tight tabular-nums text-4xl sm:text-5xl text-brand-primary-light
+                          }`}
+                      >
+                        {value}
+                      </dd>
+
+                      <dt className="mt-2.5 text-sm font-medium tracking-wide text-slate-600 sm:text-base">
+                        {label}
+                      </dt>
+                    </div>
+                  );
+                })}
+              </dl>
+            </div>
           </div>
         )}
       </section>

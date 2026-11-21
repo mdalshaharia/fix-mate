@@ -3,7 +3,7 @@
 import { Suspense, useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { Menu, CloudUpload, LayoutDashboard, LogOut, ChevronDown, Wrench, Phone, MapPin } from "lucide-react";
+import { Menu, CloudUpload, LayoutDashboard, LogOut, ChevronDown, Wrench, Phone, MapPin, Drill } from "lucide-react";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger, SheetClose } from "@/components/ui/sheet";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -11,8 +11,8 @@ import { FacebookIcon, InstagramIcon, LinkedinIcon, XIcon } from "@/components/l
 import { authClient, useSession } from "@/lib/auth-client";
 
 // Edit the strip content here
-const CALL = { label: "Call us today:", phone: "+880 1700 000000" };
-const ADDRESS = "Khulna, Bangladesh";
+const CALL = { label: "Call us today:", phone: "+880 1605763746" };
+const ADDRESS = "Chattogram, Bangladesh";
 const SOCIAL_LINKS = [
     { label: "X", href: "https://x.com/", icon: XIcon },
     { label: "Facebook", href: "https://facebook.com/", icon: FacebookIcon },
@@ -36,15 +36,15 @@ const initials = (name = "") => name.split(" ").filter(Boolean).slice(0, 2).map(
 
 // `onDark` = logo shown on the dark navbar (white text); otherwise on a light surface
 function Logo({
-    onClick,
-    onDark = false
+    onClick
 }) {
-    return <Link href="/" onClick={onClick} className="group flex items-center gap-2.5" aria-label="FixMate home">
-        <span className={`grid h-10 w-10 place-items-center rounded-xl transition-transform duration-200 group-hover:scale-105 ${onDark ? "bg-white/10 text-white ring-1 ring-white/20" : "bg-brand-primary/10 text-brand-primary dark:bg-brand-primary-lighter dark:text-brand-primary-foreground"}`}>
-            <Wrench className="h-5 w-5" />
+    return <Link href="/" onClick={onClick} className="group flex items-center " aria-label="FixMate home">
+        <span className='grid h-10 w-10 place-items-center rounded-xl transition-transform duration-200 group-hover:scale-105'>
+            {/* <Wrench className="h-5 w-5" /> */}
+            <Drill className="h-6 w-6 text-brand-primary"></Drill>
         </span>
-        <span className={`font-pacifico text-2xl font-extrabold tracking-tight ${onDark ? "text-white" : "text-brand-primary dark:text-foreground"}`}>
-            Fix<span className= "font-pacifico text-brand-secondary">Mate</span>
+        <span className='font-pacifico text-2xl font-normal tracking-wider text-brand-primary'>
+            FixmatE
         </span>
     </Link>;
 }

@@ -85,19 +85,6 @@ export default function HowItWorks() {
             ))}
           </ol>
         </div>
-
-        {/* Call to action */}
-        <div className="mt-16 flex flex-col items-center justify-between gap-6 rounded-2xl bg-primary px-6 py-8 text-center text-primary-foreground sm:px-10 md:flex-row md:text-left">
-          <div>
-            <h3 className="text-xl font-bold sm:text-2xl">Ready to get your device fixed?</h3>
-            <p className="mt-1 text-sm text-primary-foreground/80">
-              Browse services from verified technicians near you.
-            </p>
-          </div>
-          <Button asChild size="lg" variant="secondary" className="shrink-0">
-            <Link href="/services">Browse services</Link>
-          </Button>
-        </div>
       </div>
     </section>
   );

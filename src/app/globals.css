@@ -16,6 +16,7 @@
   --font-inter: var(--font-inter);
   --font-roboto: var(--font-roboto);
   --font-lato: var(--font-lato);
+  --font-pacifico: var(--font-pacifico);
 
   /* Brand colors — available as Tailwind classes:
      bg-brand-primary, text-brand-primary, border-brand-primary, etc. */
@@ -83,8 +84,6 @@
 
   --brand-accent: #c9513f;            /* Warm accent derived from secondary */
   --brand-accent-light: #d4695a;      /* Lighter accent for hovers */
-
-  --font-pacifico: var(--font-pacifico);
 
   /* ═══════════════════════════════════════════════════════
      Shadcn/Tailwind Design Tokens (derived from brand)

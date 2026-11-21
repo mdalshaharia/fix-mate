@@ -9,12 +9,17 @@ export default async function FeaturedServices() {
   if (services.length === 0) return null;
 
   return (
-    <section aria-labelledby="featured-title" className="bg-background px-4 py-12 sm:py-16">
+    <section aria-labelledby="featured-title" className="bg-background px-4 py-12 sm:py-40">
       <div className="mx-auto max-w-6xl">
         <header className="flex items-center justify-between gap-4">
-          <h2 id="featured-title" className="text-2xl font-bold tracking-tight text-foreground">
-            Featured services
-          </h2>
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-widest text-primary">
+              Featured Services
+            </p>
+            <h2 id="why-title" className="mt-2 text-3xl font-bold tracking-tight sm:text-4xl">
+              Most requested home & appliance repairs
+            </h2>
+          </div>
           <Link href="/services" className="text-sm font-semibold text-primary hover:underline">
             Browse all
           </Link>
