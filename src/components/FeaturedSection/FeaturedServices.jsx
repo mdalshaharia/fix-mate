@@ -11,9 +11,9 @@ function FeaturedCard({ service }) {
   const Icon = CATEGORIES.find((c) => c.value === category)?.icon || Wrench;
 
   return (
-    <article className="flex h-full w-full flex-col overflow-hidden rounded-xl border bg-card shadow-sm transition-shadow hover:shadow-md">
+    <article className="flex h-full w-full flex-col overflow-hidden rounded-xl border border-border bg-card shadow-sm transition-shadow hover:shadow-md">
       {/* Fixed ratio keeps every card image the same height */}
-      <div className="relative flex aspect-[16/10] w-full items-center justify-center overflow-hidden bg-gradient-to-br from-primary/5 to-primary/15">
+      <div className="relative flex aspect-[16/10] w-full items-center justify-center overflow-hidden bg-primary/5">
         {image ? (
           <Image
             src={image}
@@ -23,17 +23,17 @@ function FeaturedCard({ service }) {
             className="object-cover"
           />
         ) : (
-          <Icon className="size-12 text-primary" strokeWidth={1.5} />
+          <Icon className="size-12 text-primary/60" strokeWidth={1.5} />
         )}
       </div>
 
       <div className="flex flex-1 flex-col gap-3 p-4">
-        <Badge variant="secondary" className="w-fit text-primary">
+        <Badge variant="outline" className="w-fit border-primary/25 bg-primary/5 text-primary">
           {category}
         </Badge>
 
         {/* Two lines reserved, so long titles never change the card height */}
-        <h3 className="line-clamp-2 min-h-10 text-sm font-bold leading-5">{title}</h3>
+        <h3 className="line-clamp-2 min-h-10 text-sm font-bold leading-5 text-card-foreground">{title}</h3>
 
         <p className="flex items-center gap-1.5 text-xs text-muted-foreground">
           <ShieldCheck className="size-3.5 shrink-0 text-primary" />
@@ -48,10 +48,10 @@ function FeaturedCard({ service }) {
         )}
 
         {/* mt-auto pins the price row and button to the bottom of every card */}
-        <div className="mt-auto space-y-3">
-          <p className="text-base font-bold">From ${basePrice}</p>
+        <div className="mt-auto space-y-3 pt-1">
+          <p className="text-base font-bold text-foreground">From ${basePrice}</p>
 
-          <Button asChild variant="secondary" size="sm" className="w-full text-primary">
+          <Button asChild size="sm" className="w-full">
             <Link href={`/services/${_id}`}>View Details</Link>
           </Button>
         </div>
@@ -67,10 +67,10 @@ export default async function FeaturedServices() {
   if (services.length === 0) return null;
 
   return (
-    <section aria-labelledby="featured-title" className="px-4 py-12 sm:py-16">
+    <section aria-labelledby="featured-title" className="bg-background px-4 py-12 sm:py-16">
       <div className="mx-auto max-w-6xl">
         <header className="flex items-center justify-between gap-4">
-          <h2 id="featured-title" className="text-2xl font-bold tracking-tight">
+          <h2 id="featured-title" className="text-2xl font-bold tracking-tight text-foreground">
             Featured services
           </h2>
           <Link href="/services" className="text-sm font-semibold text-primary hover:underline">

@@ -23,6 +23,9 @@ async function handleExpiredSession() {
     await authClient.signOut();
   } catch {}
   toast.error("Your session has expired. Please sign in again.");
+  // A full reload clears any stale client state; this module is not a component,
+  // so the router hook is unavailable here.
+  // eslint-disable-next-line @next/next/no-location-assign-relative-destination
   window.location.href = "/sign-in";
 }
 

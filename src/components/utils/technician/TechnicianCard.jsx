@@ -14,8 +14,8 @@ export default function TechnicianCard({ name, email, image, bio, area }) {
 
       <div className="min-w-0 flex-1 space-y-1">
         <div className="flex flex-wrap items-center gap-2">
-          <p className="text-sm font-bold">{name}</p>
-          <Badge variant="secondary" className="gap-1 text-primary">
+          <p className="text-sm font-bold text-foreground">{name}</p>
+          <Badge variant="outline" className="gap-1 border-primary/25 bg-primary/5 text-primary">
             <ShieldCheck className="size-3" />
             Verified
           </Badge>

@@ -6,13 +6,13 @@ import { Button } from "@/components/ui/button";
 import { CATEGORIES } from "./constants";
 
 export default function ServiceCard({ service }) {
-  const { _id, title, category, image, basePrice, technicianName } = service;
+  const { _id, title, category, image, basePrice, serviceMode, technicianName } = service;
   const Icon = CATEGORIES.find((c) => c.value === category)?.icon || Wrench;
 
   return (
-    <article className="flex flex-col overflow-hidden rounded-xl border bg-card shadow-sm transition-shadow hover:shadow-md">
-      {/* Image, or a category icon when there is no image */}
-      <div className="relative flex h-40 items-center justify-center bg-gradient-to-br from-primary/5 to-primary/15">
+    <article className="flex h-full w-full flex-col overflow-hidden rounded-xl border border-border bg-card shadow-sm transition-shadow hover:shadow-md">
+      {/* Fixed ratio keeps every card image the same height */}
+      <div className="relative flex aspect-[16/10] w-full items-center justify-center overflow-hidden bg-primary/5">
         {image ? (
           <Image
             src={image}
@@ -22,30 +22,40 @@ export default function ServiceCard({ service }) {
             className="object-cover"
           />
         ) : (
-          <Icon className="size-12 text-primary" strokeWidth={1.5} />
+          <Icon className="size-12 text-primary/60" strokeWidth={1.5} />
         )}
       </div>
 
       <div className="flex flex-1 flex-col gap-3 p-4">
-        <Badge variant="secondary" className="w-fit text-primary">{category}</Badge>
+        <Badge variant="outline" className="w-fit border-primary/25 bg-primary/5 text-primary">
+          {category}
+        </Badge>
 
-        <h2 className="line-clamp-2 min-h-10 text-sm font-bold leading-5">{title}</h2>
+        {/* Two lines reserved, so long titles never change the card height */}
+        <h3 className="line-clamp-2 min-h-10 text-sm font-bold leading-5 text-card-foreground">
+          {title}
+        </h3>
 
-        <p className="flex items-center gap-1 text-xs text-muted-foreground">
-          <ShieldCheck className="size-3.5 text-primary" />
-          by {technicianName}
+        <p className="flex items-center gap-1.5 text-xs text-muted-foreground">
+          <ShieldCheck className="size-3.5 shrink-0 text-primary" />
+          <span className="truncate">{technicianName || "Verified technician"}</span>
         </p>
 
-        <p className="mt-auto text-base font-bold">From ${basePrice}</p>
+        {serviceMode && (
+          <p className="flex items-center gap-1.5 text-xs text-muted-foreground">
+            <Wrench className="size-3.5 shrink-0 text-primary" />
+            <span className="truncate">{serviceMode}</span>
+          </p>
+        )}
 
-        <Button
-          render={<Link href={`/services/${_id}`} />}
-          variant="secondary"
-          size="sm"
-          className="w-full text-primary"
-        >
-          View details
-        </Button>
+        {/* mt-auto pins the price row and button to the bottom of every card */}
+        <div className="mt-auto space-y-3 pt-1">
+          <p className="text-base font-bold text-foreground">From ${basePrice}</p>
+
+          <Button asChild size="sm" className="w-full">
+            <Link href={`/services/${_id}`}>View Details</Link>
+          </Button>
+        </div>
       </div>
     </article>
   );

@@ -45,7 +45,7 @@ const TRUST_POINTS = [
 
 export default async function CategoriesAndTrust() {
 //   const stats = await getPublicStats();
-  const stats = []
+  const stats = null
 
   // Stat tiles: shown only when the numbers could be loaded
   const statTiles = stats

@@ -1,11 +1,17 @@
-import React from 'react';
+import CustomerPayments from "@/components/dashboard/CustomerPayments";
+import PageHeader from "@/components/utils/dashboard/PageHeader";
 
-const page = () => {
-    return (
-        <div>
-          this is customer payments page  
-        </div>
-    );
-};
+export const metadata = { title: "Payments" };
 
-export default page;
+export default async function CustomerPaymentsPage({ searchParams }) {
+  const { payment, session_id: sessionId } = await searchParams; // async in Next.js 15+
+  return (
+    <>
+      <PageHeader
+        title="Payments"
+        description="What you have paid, and what is still due."
+      />
+      <CustomerPayments payment={payment} sessionId={sessionId} />
+    </>
+  );
+}

@@ -1,3 +1,5 @@
+import { cache } from "react";
+
 const PAGE_SIZE = 8;
 
 export async function getServices(params) {
@@ -17,7 +19,8 @@ export async function getServices(params) {
   return res.json();
 }
 
-export async function getService(id) {
+// cache() dedupes the metadata + page fetch for the same service in one request
+export const getService = cache(async (id) => {
   const res = await fetch(`${process.env.SERVER_BASE_URL}/services/${id}`, {
     cache: "no-store",
   });
@@ -25,4 +28,4 @@ export async function getService(id) {
   if (res.status === 404) return null;
   if (!res.ok) throw new Error("Failed to load service");
   return res.json();
-}
+});

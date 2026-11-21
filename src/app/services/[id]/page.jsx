@@ -49,7 +49,7 @@ export default async function ServiceDetailsPage({ params }) {
       <div className="mt-6 grid gap-8 lg:grid-cols-[1fr_400px]">
         {/* Left: service information */}
         <div className="space-y-8">
-          <div className="relative flex aspect-[16/10] items-center justify-center overflow-hidden rounded-2xl bg-gradient-to-br from-primary/5 to-primary/15">
+          <div className="relative flex aspect-[16/10] items-center justify-center overflow-hidden rounded-2xl border border-border bg-primary/5">
             {image ? (
               <Image
                 src={image}
@@ -60,14 +60,16 @@ export default async function ServiceDetailsPage({ params }) {
                 className="object-cover"
               />
             ) : (
-              <Icon className="size-20 text-primary" strokeWidth={1.5} />
+              <Icon className="size-20 text-primary/60" strokeWidth={1.5} />
             )}
           </div>
 
           <section className="space-y-4">
-            <Badge variant="secondary" className="text-primary">{category}</Badge>
-            <h1 className="text-4xl font-bold tracking-tight">{title}</h1>
-            <p className="text-2xl font-bold">From ${basePrice}</p>
+            <Badge variant="outline" className="border-primary/25 bg-primary/5 text-primary">
+              {category}
+            </Badge>
+            <h1 className="text-4xl font-bold tracking-tight text-foreground">{title}</h1>
+            <p className="text-2xl font-bold text-foreground">From ${basePrice}</p>
 
             <dl className="grid gap-3 sm:grid-cols-3">
               {details.map(({ icon: DetailIcon, label, value }) => (
@@ -83,20 +85,20 @@ export default async function ServiceDetailsPage({ params }) {
           </section>
 
           <section className="space-y-2">
-            <h2 className="text-lg font-bold">About this service</h2>
+            <h2 className="text-lg font-bold text-foreground">About this service</h2>
             <p className="whitespace-pre-line text-sm leading-6 text-muted-foreground">
-              {description}
+              {description || "The technician has not added a description for this service yet."}
             </p>
           </section>
 
           <section className="space-y-3">
-            <h2 className="text-lg font-bold">Your technician</h2>
+            <h2 className="text-lg font-bold text-foreground">Your technician</h2>
             <TechnicianCard
-              name={technician?.name || technicianName}
-              email={technicianEmail}
+              name={technician?.name || technicianName || "Verified technician"}
+              email={technician?.email || technicianEmail}
               image={technician?.image}
               bio={technician?.bio}
-              area={serviceArea}
+              area={technician?.area || serviceArea}
             />
           </section>
         </div>
