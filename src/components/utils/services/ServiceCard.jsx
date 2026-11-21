@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { CATEGORIES } from "./constants";
 
 export default function ServiceCard({ service }) {
-  const { _id, title, category, image, basePrice, serviceMode, technicianName } = service;
+  const { _id, title, category, image, basePrice, serviceMode, technicianName,serviceArea } = service;
   const Icon = CATEGORIES.find((c) => c.value === category)?.icon || Wrench;
 
   return (
@@ -45,6 +45,12 @@ export default function ServiceCard({ service }) {
           <p className="flex items-center gap-1.5 text-xs text-muted-foreground">
             <Wrench className="size-3.5 shrink-0 text-primary" />
             <span className="truncate">{serviceMode}</span>
+          </p>
+        )}
+        {serviceArea && (
+          <p className="flex items-center gap-1.5 text-xs text-muted-foreground">
+            <Wrench className="size-3.5 shrink-0 text-primary" />
+            <span className="truncate">{serviceArea}</span>
           </p>
         )}
 

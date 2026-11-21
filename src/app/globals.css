@@ -211,3 +211,24 @@
     animation: none;
   }
 }
+
+@keyframes modal-drop {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -2rem);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+.modal-drop {
+  animation: modal-drop 0.45s cubic-bezier(0.2, 0.9, 0.3, 1.2) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .modal-drop {
+    animation: none;
+  }
+}

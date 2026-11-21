@@ -142,7 +142,13 @@ function NavbarInner() {
                                     <div className="mb-3 flex items-center gap-3 px-1">
                                         <UserAvatar user={user} />
                                         <div className="min-w-0">
-                                            <p className="truncate text-sm font-semibold text-foreground">{user.name}</p>
+                                            <p className="truncate text-sm font-semibold text-foreground">
+                                                {user.name}{" "}
+                                                <span className="text-xs font-normal text-muted-foreground">
+                                                    ({user.role})
+                                                </span>
+                                            </p>
+                                            <span>{user?.role}</span>
                                             {user.email && <p className="truncate text-xs text-muted-foreground">{user.email}</p>}
                                         </div>
                                     </div>
@@ -202,7 +208,12 @@ function NavbarInner() {
                         <DropdownMenuContent align="end" className="w-60 rounded-2xl border border-brand-primary/10 bg-popover p-1.5 text-foreground shadow-xl dark:border-border">
                             <DropdownMenuGroup>
                                 <DropdownMenuLabel className="truncate px-3 py-2 text-foreground">
-                                    <span className="font-semibold text-foreground">{user.name}</span>
+                                    <p className="truncate text-sm font-semibold text-foreground">
+                                        {user.name}{" "}
+                                        <span className="text-xs font-normal text-muted-foreground">
+                                            ({user.role})
+                                        </span>
+                                    </p>
                                     {user.email && <span className="block truncate text-xs font-normal text-muted-foreground">
                                         {user.email}
                                     </span>}

@@ -174,7 +174,7 @@ export default function CustomerPayments({ payment, sessionId }) {
             const res = await authorizedFetch("/payments/checkout", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ bookingId: booking._id, returnTo: "payments" }),
+                body: JSON.stringify({ bookingId: booking._id }),
             });
             const result = await res.json().catch(() => ({}));
 
