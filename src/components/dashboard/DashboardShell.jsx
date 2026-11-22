@@ -1,15 +1,14 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { usePathname, useRouter } from "next/navigation";
+import { useState } from "react";
+import { usePathname } from "next/navigation";
 import { Sheet, SheetContent, SheetTitle } from "@/components/ui/sheet";
 import { Skeleton } from "@/components/ui/skeleton";
 import SidebarNav from "@/components/dashboard/SidebarNav";
 import Topbar from "@/components/dashboard/Topbar";
 import { MENU } from "./dashboardMenu";
-import { useSession } from "@/lib/auth-client";
 
-function DashboardSkeleton() {
+export function DashboardSkeleton() {
   return (
     <div aria-busy="true" aria-label="Loading dashboard" className="min-h-screen bg-muted/30">
       <aside className="fixed inset-y-0 left-0 z-40 hidden w-64 border-r bg-card p-4 lg:block">
@@ -52,42 +51,33 @@ function DashboardSkeleton() {
   );
 }
 
-export default function DashboardShell({ children }) {
-  const router = useRouter();
+export default function DashboardShell({ children, user }) {
   const pathname = usePathname();
-  const { data: user, isPending: loading } = useSession();
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const home = user?.user && MENU[user?.user?.role] ? `/dashboard/${user?.user.role}` : null;
   const isProfile = pathname === "/dashboard/profile" || pathname.startsWith("/dashboard/profile/");
-  const allowed = !!home && (isProfile || pathname === home || pathname.startsWith(`${home}/`));
+  const home = `/dashboard/${user.role}`;
+  const allowed = isProfile || pathname === home || pathname.startsWith(`${home}/`);
 
-  useEffect(() => {
-    if (loading) return;
-    if (!user) router.replace(`/sign-in?callbackUrl=${encodeURIComponent(pathname)}`);
-    else if (!home) router.replace("/");
-    else if (!allowed) router.replace(home);
-  }, [loading, user, home, allowed, pathname, router]);
-
-  if (loading || !allowed) return <DashboardSkeleton />;
+  if (!MENU[user.role] || !allowed) return <DashboardSkeleton />;
 
   return (
     <div className="min-h-screen bg-muted/30">
       { }
       <aside className="fixed inset-y-0 left-0 z-40 hidden w-64 border-r bg-card lg:block">
-        <SidebarNav role={user?.user.role} />
+        <SidebarNav role={user.role} />
       </aside>
 
       { }
       <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
         <SheetContent side="left" className="w-64 p-0">
           <SheetTitle className="sr-only">Navigation menu</SheetTitle>
-          <SidebarNav role={user?.user.role} onNavigate={() => setMenuOpen(false)} />
+          <SidebarNav role={user.role} onNavigate={() => setMenuOpen(false)} />
         </SheetContent>
       </Sheet>
 
       <div className="lg:pl-64">
-        <Topbar user={user.user} onMenuClick={() => setMenuOpen(true)} />
+        <Topbar user={user} onMenuClick={() => setMenuOpen(true)} />
         <main className="p-4 sm:p-6">{children}</main>
       </div>
     </div>
