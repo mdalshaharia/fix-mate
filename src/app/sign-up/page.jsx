@@ -89,8 +89,8 @@ function Register() {
         role,
       });
       if (data?.token || data?.user) {
-        toast.success("Account created successfully.");
-        router.push("/");
+        toast.success("Account created successfully. pls login !!");
+        router.push("/sign-in");
         router.refresh();
       }
       if (error) {
