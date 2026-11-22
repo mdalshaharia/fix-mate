@@ -2,13 +2,30 @@ import { betterAuth } from "better-auth";
 import { MongoClient } from "mongodb";
 import { mongodbAdapter } from "@better-auth/mongo-adapter";
 import { jwt } from "better-auth/plugins";
+const secret = process.env.BETTER_AUTH_SECRET;
+if (process.env.NODE_ENV === "production" && (!secret || secret.length < 32)) {
+  throw new Error("BETTER_AUTH_SECRET must be set to at least 32 characters in production.");
+}
+
 const client = new MongoClient(process.env.DB_URL);
 const db = client.db('fix-mate');
 export const auth = betterAuth({
+  secret,
   trustedOrigins: ["http://localhost:3000", "https://studio-space-ivory.vercel.app"],
+  rateLimit: {
+    enabled: true,
+    window: 60,
+    max: 100,
+    storage: "database",
+    customRules: {
+      "/sign-in/email": { window: 60, max: 5 },
+      "/sign-up/email": { window: 60, max: 5 },
+      "/sign-in/social": { window: 60, max: 10 },
+    },
+  },
   emailAndPassword: {
     enabled: true,
-    autoSignIn: false
+    autoSignIn: true
   },
   user: {
     additionalFields: {

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Mail, MapPin, Phone, Wrench } from "lucide-react";
+import { Drill, Mail, MapPin, Phone, Wrench } from "lucide-react";
 import {
   FacebookIcon,
   InstagramIcon,
@@ -50,15 +50,18 @@ const CURRENT_YEAR = new Date().getFullYear();
 
 export default function Footer() {
   return (
-    <footer className="bg-foreground text-background">
+    <footer className="bg-brand-primary text-background">
       <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1.3fr]">
         {/* Brand */}
         <div className="space-y-4">
-          <Link href="/" className="inline-flex items-center gap-2">
-            <span className="flex size-9 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-              <Wrench className="size-5" />
+          <Link href="/" className="group flex items-center " aria-label="FixMate home">
+            <span className='grid h-10 w-10 place-items-center rounded-xl transition-transform duration-200 group-hover:scale-105'>
+              {/* <Wrench className="h-5 w-5" /> */}
+              <Drill className="h-6 w-6 text-white"></Drill>
             </span>
-            <span className="text-xl font-bold">FixMate</span>
+            <span className='font-pacifico text-2xl font-normal tracking-wider text-white'>
+              FixmatE
+            </span>
           </Link>
           <p className="max-w-xs text-sm leading-6 text-background/70">{TAGLINE}</p>
         </div>

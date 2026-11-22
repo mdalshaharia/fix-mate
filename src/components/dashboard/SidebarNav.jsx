@@ -2,9 +2,9 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Wrench } from "lucide-react";
+import { Drill, Wrench } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { MENU ,MENU_TITLE} from "./dashboardMenu";
+import { MENU, MENU_TITLE } from "./dashboardMenu";
 // import { MENU, MENU_TITLE } from "@/lib/dashboardMenu";
 
 export default function SidebarNav({ role, onNavigate }) {
@@ -13,11 +13,14 @@ export default function SidebarNav({ role, onNavigate }) {
 
   return (
     <div className="flex h-full flex-col gap-6 p-4">
-      <Link href="/" className="flex items-center gap-2 px-2">
-        <span className="flex size-9 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-          <Wrench className="size-5" />
+      <Link href="/" className="group flex items-center " aria-label="FixMate home">
+        <span className='grid h-10 w-10 place-items-center rounded-xl transition-transform duration-200 group-hover:scale-105'>
+          {/* <Wrench className="h-5 w-5" /> */}
+          <Drill className="h-6 w-6 text-brand-primary"></Drill>
         </span>
-        <span className="text-lg font-bold">FixMate</span>
+        <span className='font-pacifico text-2xl font-normal tracking-wider text-brand-primary'>
+          FixmatE
+        </span>
       </Link>
 
       <nav aria-label="Dashboard" className="space-y-1">

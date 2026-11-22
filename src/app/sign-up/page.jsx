@@ -91,12 +91,14 @@ function Register() {
         role,
       });
       if (data?.token || data?.user) {
-        toast.success("Registration successful, please sign in");
-        router.push('/sign-in');
+        toast.success("Account created successfully.");
+        router.push("/");
+        router.refresh();
       }
       if (error) {
         const friendly = {
           USER_ALREADY_EXISTS: "An account with this email already exists. Try signing in instead.",
+          USER_ALREADY_EXISTS_USE_ANOTHER_EMAIL: "An account with this email already exists. Try signing in instead.",
           PASSWORD_TOO_SHORT: "Password must be at least 8 characters.",
           INVALID_EMAIL: "Please enter a valid email address."
         };
@@ -107,6 +109,9 @@ function Register() {
         return;
       }
     } catch (error) {
+      setErrors({
+        form: error instanceof Error ? error.message : "Something went wrong. Please try again."
+      });
     } finally {
       setLoading(false);
     }
@@ -143,8 +148,8 @@ function Register() {
   };
   return <section className="mx-auto w-full max-w-lg px-4 py-8 sm:px-6 sm:py-12">
             <div className="rounded-3xl border border-border bg-card p-6 shadow-sm sm:p-8">
-                <div className="flex justify-center mb-4">
-                        <Image src="/brad-logo.png" alt="" width={28} height={28} className="h-7 w-7 object-contain dark:invert" />
+                <div className="flex justify-center mb-1">
+                        <Image src="/favicon2.png" alt="" width={28} height={28} className="h-7 w-7 object-contain dark:invert" />
                 </div>
                 <h1 className="text-3xl font-extrabold tracking-tight text-heading text-center">Create account</h1>
 

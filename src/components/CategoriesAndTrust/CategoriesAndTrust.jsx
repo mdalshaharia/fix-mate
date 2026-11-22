@@ -169,8 +169,8 @@ export default function CategoriesAndTrust() {
                       {/* Small Indicator Pill */}
                       <span
                         aria-hidden="true"
-                        className={`mb-3 h-1.5 w-6 rounded-full transition-all duration-300 group-hover:w-10 ${isSecondary ? "bg-brand-secondary/70" : "bg-brand-primary/70"
-                          }`}
+                        className={`mb-3 h-1.5 w-6 rounded-full transition-all duration-300 group-hover:w-10 bg-brand-primary/70
+                          `}
                       />
 
                       <dd

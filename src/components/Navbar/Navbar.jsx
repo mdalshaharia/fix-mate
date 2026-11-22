@@ -66,7 +66,7 @@ function TopStrip() {
                         </a>
                     </li>)}
                 </ul>
-                <a href={`tel:${CALL.phone.replace(/\s/g, "")}`} className="flex items-center gap-2 bg-brand-secondary px-4 text-[11px] font-bold uppercase tracking-wider text-brand-secondary-foreground transition-colors hover:bg-brand-secondary-light">
+                <a href={`tel:${CALL.phone.replace(/\s/g, "")}`} className="flex items-center gap-2 bg-brand-secondary-light px-4 text-[11px] font-bold uppercase tracking-wider text-brand-secondary-foreground transition-colors hover:bg-brand-secondary-light">
                     <Phone className="h-3.5 w-3.5" />
                     {CALL.label} {CALL.phone}
                 </a>
@@ -130,7 +130,7 @@ function NavbarInner() {
                                 }) => {
                                     const active = isActive(pathname, href);
                                     return <li key={href}>
-                                        <SheetClose nativeButton={false} render={<Link href={href} aria-current={active ? "page" : undefined} className={`rounded-xl px-3 py-2.5 text-xs font-semibold uppercase tracking-wider transition-colors ${active ? "bg-brand-secondary/10 font-bold text-brand-secondary" : "text-brand-primary/70 hover:bg-brand-primary/5 hover:text-brand-primary dark:text-white/70 dark:hover:bg-white/5"}`} />}>
+                                        <SheetClose nativeButton={false} render={<Link href={href} aria-current={active ? "page" : undefined} className={`rounded-xl px-3 py-2.5 text-xs font-semibold uppercase tracking-wider transition-colors ${active ? "bg-brand-secondary/10 font-bold text-brand-secondary" : "text-brand-primary/70 hover:bg-brand-primary/5 hover:text-brand-primary"}`} />}>
                                             {label}
                                         </SheetClose>
                                     </li>;

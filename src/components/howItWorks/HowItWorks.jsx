@@ -26,7 +26,7 @@ const STEPS = [
 
 export default function HowItWorks() {
   return (
-    <section aria-labelledby="how-it-works-title" className="bg-background px-4 py-16 sm:py-24">
+    <section aria-labelledby="how-it-works-title" className="bg-background px-4 pb-20">
       <div className="mx-auto max-w-6xl">
         <header className="mx-auto max-w-2xl text-center">
           <p className="text-sm font-semibold uppercase tracking-widest text-primary">

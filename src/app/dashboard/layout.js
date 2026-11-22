@@ -3,7 +3,7 @@
 import DashboardShell from "@/components/dashboard/DashboardShell";
 
 export const metadata = {
-  title: { template: "%s | FixMate", default: "Dashboard | FixMate" },
+  title: { template: "FixMate | %s", default: "Dashboard" },
 };
 
 export default function DashboardLayout({ children }) {

@@ -146,9 +146,9 @@ function ProfileForm({ user }) {
 
         <div className="space-y-1.5">
           <p className="text-base font-bold">{user.name}</p>
-          <Badge variant="secondary" className="capitalize text-primary">
+          {/* <Badge variant="secondary" className="capitalize text-primary">
             {user.role}
-          </Badge>
+          </Badge> */}
         </div>
 
         <label
@@ -239,7 +239,7 @@ function ProfileForm({ user }) {
         </Field>
 
         <div className="flex gap-3">
-          <Button type="submit" disabled={saving || uploading}>
+          <Button className='bg-brand-primary' type="submit" disabled={saving || uploading}>
             {saving ? "Saving..." : "Save Changes"}
           </Button>
           <Button type="button" variant="outline" disabled={saving} onClick={handleCancel}>
