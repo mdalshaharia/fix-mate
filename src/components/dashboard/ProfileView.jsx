@@ -20,7 +20,6 @@ const MAX_SIZE_MB = 5;
 const MAX_BIO = 300;
 const PHONE_REGEX = /^\+?[0-9\s-]{7,15}$/;
 
-// Same rules as the better-auth update hook (the hook is the real check)
 function validate(form) {
   const errors = {};
   const name = form.name.trim();
@@ -33,7 +32,6 @@ function validate(form) {
   return errors;
 }
 
-// Label + input + error message
 function Field({ id, label, error, className, children }) {
   return (
     <div className={cn("space-y-1.5", className)}>
@@ -47,7 +45,6 @@ function Field({ id, label, error, className, children }) {
 function ProfileForm({ user }) {
   const router = useRouter();
 
-  // Values currently saved; Cancel goes back to these
   const saved = {
     name: user.name ?? "",
     phone: user.phone ?? "",
@@ -67,7 +64,6 @@ function ProfileForm({ user }) {
     setErrors((prev) => ({ ...prev, [name]: undefined }));
   };
 
-  // The photo uploads right away; it is saved to the profile with "Save Changes"
   async function handlePhoto(file) {
     if (!file) return;
 
@@ -100,7 +96,6 @@ function ProfileForm({ user }) {
 
     setSaving(true);
     try {
-      // updateUser also refreshes the session, so the navbar and top bar update on their own
       const { error } = await authClient.updateUser({
         name: form.name.trim(),
         phone: form.phone.trim(),
@@ -115,7 +110,7 @@ function ProfileForm({ user }) {
       }
 
       toast.success("Profile updated");
-      router.refresh(); // also refreshes any server-rendered navbar
+      router.refresh();
     } catch {
       toast.error("Network error. Please try again.");
     } finally {
@@ -135,7 +130,7 @@ function ProfileForm({ user }) {
       noValidate
       className="grid items-start gap-6 lg:grid-cols-[320px_minmax(0,1fr)]"
     >
-      {/* Photo card */}
+      { }
       <section className="flex flex-col items-center gap-3 rounded-2xl border bg-card p-6 text-center shadow-sm">
         <Avatar className="size-24">
           <AvatarImage src={image} alt={user.name} />
@@ -146,9 +141,9 @@ function ProfileForm({ user }) {
 
         <div className="space-y-1.5">
           <p className="text-base font-bold">{user.name}</p>
-          {/* <Badge variant="secondary" className="capitalize text-primary">
-            {user.role}
-          </Badge> */}
+          {
+
+}
         </div>
 
         <label
@@ -169,7 +164,7 @@ function ProfileForm({ user }) {
             disabled={uploading}
             onChange={(e) => {
               handlePhoto(e.target.files[0]);
-              e.target.value = ""; // lets the same file be picked again
+              e.target.value = "";
             }}
           />
         </label>
@@ -177,7 +172,7 @@ function ProfileForm({ user }) {
         <p className="text-xs text-muted-foreground">JPG or PNG, up to {MAX_SIZE_MB} MB</p>
       </section>
 
-      {/* Details card */}
+      { }
       <section className="space-y-4 rounded-2xl border bg-card p-5 shadow-sm sm:p-6">
         <div className="grid gap-4 sm:grid-cols-2">
           <Field id="name" label="Full name" error={errors.name}>
@@ -251,7 +246,6 @@ function ProfileForm({ user }) {
   );
 }
 
-// Waits for the session, then gives the form the saved values to start from
 export default function ProfileView() {
   const { data: session, isPending: loading } = useSession();
   const user = session?.user;

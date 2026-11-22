@@ -6,22 +6,18 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-// Edit the content here without touching the markup
 const SLIDES = ["/banner-5.jpg", "/banner-6.jpg", "/banner-7.jpg", "/banner-4.jpg"];
-const SLIDE_INTERVAL = 5000; // ms
+const SLIDE_INTERVAL = 5000;
 
 const CONTENT = {
   title: "We Can Fix That",
   subtitle: "Broken smartphone, laptop, AC or fridge? Book a verified technician in minutes.",
-  // primary: { label: "Browse Services", href: "/services" },
-  // secondary: { label: "Become a Technician", href: "/sign-up" },
 };
 
 export default function Hero() {
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
 
-  // Auto-slide. Depending on `index` restarts the timer after a manual click on a dot.
   useEffect(() => {
     if (paused) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -39,7 +35,7 @@ export default function Hero() {
       onFocus={() => setPaused(true)}
       onBlur={() => setPaused(false)}
     >
-      {/* Sliding images (decorative, so the alt text is empty) */}
+      { }
       <div
         aria-hidden="true"
         className="absolute inset-0 flex transition-transform duration-700 ease-in-out motion-reduce:transition-none"
@@ -51,7 +47,7 @@ export default function Hero() {
               src={src}
               alt=""
               fill
-              priority={i === 0} // only the first image is needed right away
+              priority={i === 0}
               sizes="100vw"
               className="object-cover"
             />
@@ -59,10 +55,10 @@ export default function Hero() {
         ))}
       </div>
 
-      {/* Dark overlay keeps the text readable on any photo */}
+      { }
       <div className="absolute inset-0 bg-black/60" />
 
-      {/* Content */}
+      { }
       <div className="relative z-10 mx-auto flex h-full max-w-4xl flex-col items-center justify-center gap-6 px-4 text-center">
         <h1 className="hero-fade-up text-4xl font-bold tracking-tight sm:text-6xl lg:text-7xl">
           {CONTENT.title}
@@ -90,7 +86,7 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Slide dots */}
+      { }
       <div className="absolute bottom-6 left-1/2 z-10 flex -translate-x-1/2 gap-2">
         {SLIDES.map((src, i) => (
           <button

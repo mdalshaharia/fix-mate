@@ -18,7 +18,7 @@ const formatMoney = (value, currency = "USD") => {
 };
 
 export default function PaymentSuccess({ sessionId }) {
-  const [result, setResult] = useState(() => (sessionId ? null : { state: "error" })); // { state: "paid" | "unpaid" | "error", ...data }
+  const [result, setResult] = useState(() => (sessionId ? null : { state: "error" }));
 
   useEffect(() => {
     if (!sessionId) return;
@@ -34,7 +34,6 @@ export default function PaymentSuccess({ sessionId }) {
         if (!res.ok) throw new Error(data.message);
         if (!ignore) setResult({ ...data, state: data.paymentStatus === "paid" ? "paid" : "unpaid" });
       } catch (err) {
-        // authorizedFetch is already signing the user out and redirecting
         if (ignore || err.message?.startsWith("session-expired")) return;
         setResult({ state: "error" });
       }

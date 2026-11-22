@@ -7,8 +7,6 @@ import Navbar from "@/components/Navbar/Navbar";
 import { SkeletonCard } from "@/components/Skeletons";
 import { Skeleton } from "@/components/ui/skeleton";
 import Footer from "@/components/Footer/Footer";
-// import { Footer } from "react-day-picker";
-// import { Footer } from "react-day-picker";
 
 function FeaturedServicesFallback() {
   return (

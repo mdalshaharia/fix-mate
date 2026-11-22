@@ -5,7 +5,6 @@ import { usePathname } from "next/navigation";
 import { Drill, Wrench } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { MENU, MENU_TITLE } from "./dashboardMenu";
-// import { MENU, MENU_TITLE } from "@/lib/dashboardMenu";
 
 export default function SidebarNav({ role, onNavigate }) {
   const pathname = usePathname();
@@ -15,7 +14,7 @@ export default function SidebarNav({ role, onNavigate }) {
     <div className="flex h-full flex-col gap-6 p-4">
       <Link href="/" className="group flex items-center " aria-label="FixMate home">
         <span className='grid h-10 w-10 place-items-center rounded-xl transition-transform duration-200 group-hover:scale-105'>
-          {/* <Wrench className="h-5 w-5" /> */}
+          { }
           <Drill className="h-6 w-6 text-brand-primary"></Drill>
         </span>
         <span className='font-pacifico text-2xl font-normal tracking-wider text-brand-primary'>

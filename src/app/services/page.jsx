@@ -6,7 +6,7 @@ import { getServices } from "@/lib/services";
 export const metadata = { title: "Browse repair services" };
 
 export default async function ServicesPage({ searchParams }) {
-  const params = await searchParams; // async in Next.js 15+
+  const params = await searchParams;
   const { services, total, page, totalPages } = await getServices(params);
 
   return (

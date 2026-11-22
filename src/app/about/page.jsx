@@ -23,7 +23,7 @@ export default function AboutPage() {
     <>
       <Navbar />
       <main className="bg-background text-foreground">
-        {/* hero */}
+        { }
         <section className="mx-auto grid max-w-6xl items-center gap-10 px-4 py-16 sm:px-6 md:grid-cols-2 lg:py-24">
           <div>
             <p className="text-sm font-semibold uppercase tracking-widest text-primary">About FixMate</p>
@@ -72,7 +72,7 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* mission */}
+        { }
         <section className="bg-brand-primary text-brand-primary-foreground">
           <div className="mx-auto max-w-4xl px-4 py-16 text-center sm:px-6">
             <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">Our mission</h2>
@@ -83,7 +83,7 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* how it works */}
+        { }
         <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
           <header className="mx-auto max-w-2xl text-center">
             <p className="text-sm font-semibold uppercase tracking-widest text-primary">How it works</p>
@@ -108,7 +108,7 @@ export default function AboutPage() {
           </ol>
         </section>
 
-        {/* values */}
+        { }
         <section className="bg-muted/40">
           <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
             <h2 className="text-center text-3xl font-bold tracking-tight sm:text-4xl">What we stand for</h2>
@@ -128,7 +128,7 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* CTA */}
+        { }
         <section className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
           <div className="flex flex-col items-center rounded-3xl bg-gradient-to-br from-brand-primary to-brand-primary-light px-6 py-12 text-center text-brand-primary-foreground">
             <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">Something broken? Let&apos;s fix it.</h2>

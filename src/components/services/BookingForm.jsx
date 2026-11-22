@@ -17,7 +17,6 @@ import { authorizedFetch } from "@/lib/getTokenFromClient";
 const MIN_PROBLEM_LENGTH = 20;
 const PHONE_REGEX = /^\+?[0-9\s-]{7,15}$/;
 
-// Local date -> "YYYY-MM-DD" (toISOString() would shift the day in some timezones)
 function toDateString(date) {
     const month = String(date.getMonth() + 1).padStart(2, "0");
     const day = String(date.getDate()).padStart(2, "0");
@@ -39,10 +38,8 @@ export default function BookingForm({ service, isAvailable }) {
     const [submitting, setSubmitting] = useState(false);
 
     const isCustomer = user?.user?.role === "customer";
-    // Change "callbackUrl" if your auth library uses another name (e.g. "redirect")
     const signInUrl = `/sign-in?callbackUrl=${encodeURIComponent(pathname)}`;
 
-    // Logged-out users can click (to be redirected); other roles cannot
     const canClick = isAvailable && !loading && (!user || isCustomer);
 
     const today = new Date();
@@ -98,7 +95,6 @@ export default function BookingForm({ service, isAvailable }) {
             const data = await res.json().catch(() => ({}));
 
             if (!res.ok) {
-                // Includes: "You already have an active request for this service"
                 toast.error(data.message || "Could not send your request. Please try again.");
                 return;
             }
@@ -135,7 +131,7 @@ export default function BookingForm({ service, isAvailable }) {
                 </p>
             </div>
 
-            {/* Read-only fields from the session */}
+            { }
             <div className="space-y-1.5">
                 <Label htmlFor="name">Name</Label>
                 <Input id="name" value={user?.user?.name || ""} placeholder="Sign in to fill this" readOnly className="bg-muted" />
@@ -202,7 +198,7 @@ export default function BookingForm({ service, isAvailable }) {
                                 setDate(selected);
                                 setCalendarOpen(false);
                             }}
-                            disabled={{ before: today }} // today or later only
+                            disabled={{ before: today }}
                         />
                     </PopoverContent>
                 </Popover>
@@ -232,7 +228,7 @@ export default function BookingForm({ service, isAvailable }) {
                 {submitting ? "Sending..." : "Send Request"}
             </Button>
 
-            {/* Notices */}
+            { }
             {!isAvailable && (
                 <p className="text-center text-xs text-muted-foreground">
                     This service is not accepting requests right now.

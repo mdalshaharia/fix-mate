@@ -10,7 +10,6 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { FacebookIcon, InstagramIcon, LinkedinIcon, XIcon } from "@/components/layout/SocialIcons";
 import { authClient, useSession } from "@/lib/auth-client";
 
-// Edit the strip content here
 const CALL = { label: "Call us today:", phone: "+880 1605763746" };
 const ADDRESS = "Chattogram, Bangladesh";
 const SOCIAL_LINKS = [
@@ -34,13 +33,12 @@ const NAV_LINKS = [{
 const isActive = (pathname, href) => href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(href + "/");
 const initials = (name = "") => name.split(" ").filter(Boolean).slice(0, 2).map(n => n[0]?.toUpperCase()).join("") || "U";
 
-// `onDark` = logo shown on the dark navbar (white text); otherwise on a light surface
 function Logo({
     onClick
 }) {
     return <Link href="/" onClick={onClick} className="group flex items-center " aria-label="FixMate home">
         <span className='grid h-10 w-10 place-items-center rounded-xl transition-transform duration-200 group-hover:scale-105'>
-            {/* <Wrench className="h-5 w-5" /> */}
+            { }
             <Drill className="h-6 w-6 text-brand-primary"></Drill>
         </span>
         <span className='font-pacifico text-2xl font-normal tracking-wider text-brand-primary'>
@@ -49,7 +47,6 @@ function Logo({
     </Link>;
 }
 
-// Slim strip above the main bar: address on the left, social + call badge on the right
 function TopStrip() {
     return <div className="hidden border-b border-brand-primary/10 text-brand-primary sm:block">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
@@ -97,7 +94,7 @@ function NavbarInner() {
         icon: LayoutDashboard
     }, {
         label: "Update Profile",
-        href: "/dashboard/profile", // leading slash added: it was a relative link before
+        href: "/dashboard/profile",
         icon: CloudUpload
     }
     ];
@@ -109,7 +106,7 @@ function NavbarInner() {
 
         <header className="sticky top-0 z-50 border-b border-brand-primary/10 bg-white/70 backdrop-blur-xl shadow-[0_1px_3px_0_rgba(21,65,90,0.06)] dark:border-border dark:bg-background/80">
             <nav className="mx-auto flex h-20 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
-                {/* Left: menu button (mobile) + logo */}
+                { }
                 <div className="flex items-center gap-2">
                     <Sheet open={open} onOpenChange={setOpen}>
                         <SheetTrigger render={<button className="btn btn-ghost btn-square text-brand-primary hover:bg-brand-primary/10 dark:text-foreground dark:hover:bg-white/5 lg:hidden" aria-label="Open menu" />}>
@@ -179,7 +176,7 @@ function NavbarInner() {
                     <Logo />
                 </div>
 
-                {/* Right: links + account */}
+                { }
                 <div className="flex items-center gap-2 lg:gap-6">
                     <ul className="hidden items-center lg:flex">
                         {NAV_LINKS.map(({

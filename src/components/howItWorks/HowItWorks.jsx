@@ -2,7 +2,6 @@ import Link from "next/link";
 import { CheckCircle2, ClipboardCheck, Search, Wrench } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-// Edit the content here without touching the markup
 const STEPS = [
   {
     icon: Search,
@@ -42,7 +41,7 @@ export default function HowItWorks() {
         </header>
 
         <div className="relative mt-16">
-          {/* Dashed timeline behind the badges (desktop only, decorative) */}
+          { }
           <div
             aria-hidden="true"
             className="absolute top-0 hidden border-t-2 border-dashed border-primary/30 md:block"
@@ -55,7 +54,7 @@ export default function HowItWorks() {
                 key={title}
                 className="relative rounded-2xl border bg-card px-6 pb-8 pt-12 text-center shadow-sm transition-shadow hover:shadow-lg motion-reduce:transition-none"
               >
-                {/* Number badge on the top edge of the card */}
+                { }
                 <span
                   aria-hidden="true"
                   className="absolute left-1/2 top-0 flex size-10 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-primary text-sm font-bold text-primary-foreground ring-4 ring-background"

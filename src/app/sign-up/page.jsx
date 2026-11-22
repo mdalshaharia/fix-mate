@@ -6,7 +6,6 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "sonner";
 import { Circle, CircleCheck, Eye, EyeOff, Loader2, User, Wrench } from "lucide-react";
-// import { signUp, signIn } from "../lib/auth-client";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { AlertTriangle } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -15,7 +14,6 @@ import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Separator } from "@/components/ui/separator";
 import Navbar from "@/components/Navbar/Navbar";
-// import { LoaderScreen } from "@/components/Skeletons";
 import { signUp, signIn } from "@/lib/auth-client";
 import { LoaderScreen } from "@/components/Skeletons";
 

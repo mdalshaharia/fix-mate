@@ -1,4 +1,3 @@
-// Brand icons as inline SVG (no icon library needed). X is filled; the others are outlines.
 const outline = {
   viewBox: "0 0 24 24",
   fill: "none",

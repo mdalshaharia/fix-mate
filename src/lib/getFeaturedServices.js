@@ -2,8 +2,8 @@ const FEATURED_LIMIT = 6;
 
 export async function getFeaturedServices() {
   try {
-    const res = await fetch(`${process.env.SERVER_BASE_URL}/services/featured`, {
-      cache: "no-store", // the home page should always show the latest six
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/services/featured`, {
+      cache: "no-store",
     });
 
     if (!res.ok) return [];
@@ -13,7 +13,6 @@ export async function getFeaturedServices() {
 
     return Array.isArray(services) ? services.slice(0, FEATURED_LIMIT) : [];
   } catch {
-    // Never break the home page if the API is unreachable
     return [];
   }
 }

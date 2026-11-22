@@ -3,8 +3,6 @@ import { MongoClient } from "mongodb";
 const DB_NAME = "fix-mate";
 const COLLECTION = "services";
 
-// Sample service matching the shape written by POST /services in a9_server.
-// Override any value with an env var, e.g. TECHNICIAN_EMAIL=me@example.com npm run seed:service
 const service = {
   title: process.env.SERVICE_TITLE || "Smartphone Screen Replacement",
   category: process.env.SERVICE_CATEGORY || "Smartphone",
@@ -34,17 +32,14 @@ try {
   await client.connect();
   const services = client.db(DB_NAME).collection(COLLECTION);
 
-  // Idempotent: don't insert the same service twice for the same technician.
   const existing = await services.findOne({
     title: service.title,
     technicianEmail: service.technicianEmail,
   });
 
   if (existing) {
-    console.log(`Service already exists (${existing._id}); nothing inserted.`);
   } else {
     const result = await services.insertOne(service);
-    console.log(`Inserted service "${service.title}" with _id ${result.insertedId}`);
   }
 } catch (error) {
   console.error("Seed failed:", error.message);

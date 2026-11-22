@@ -10,9 +10,7 @@ import {
 } from "lucide-react";
 import { CATEGORIES } from "@/components/utils/services/constants";
 import AlternatingTimeline from "../Timeline/AlternatingTimeline";
-// import {WHY_IMAGE} from '../../../public/trust-img.webp'
 
-// Display text per category. Keys must match the category values in lib/constants.js.
 const CATEGORY_TEXT = {
   Smartphone: { label: "Smartphone", blurb: "Screens, batteries, charging ports" },
   Laptop: { label: "Laptop & PC", blurb: "Servicing, upgrades, software fixes" },
@@ -24,9 +22,7 @@ const CATEGORY_TEXT = {
 };
 
 
-// const WHY_IMAGE = '/public/trust-img.webp';
 
-// Edit the feature cards here without touching the markup
 const FEATURES = [
   { icon: ShieldCheck, title: "Verified technicians" },
   { icon: CreditCard, title: "Pay after service" },
@@ -44,7 +40,7 @@ export default function CategoriesAndTrust() {
 
   return (
     <>
-      {/* Popular categories */}
+      { }
       <section aria-labelledby="categories-title" className="bg-muted/40 px-4 py-16 sm:py-24">
         <div className="mx-auto max-w-6xl">
           <header className="mx-auto max-w-2xl text-center">
@@ -87,7 +83,7 @@ export default function CategoriesAndTrust() {
               );
             })}
 
-            {/* Last tile fills the grid and links to everything */}
+            { }
             <li>
               <Link
                 href="/services"
@@ -101,7 +97,7 @@ export default function CategoriesAndTrust() {
         </div>
       </section>
 
-      {/* Why choose us */}
+      { }
       <section aria-labelledby="why-title" className="bg-background">
         <div className="mx-auto max-w-6xl px-4 pt-10 sm:pt-12">
           <p className="text-sm font-semibold uppercase tracking-widest text-primary">
@@ -112,13 +108,13 @@ export default function CategoriesAndTrust() {
           </h2>
 
           <div className="mt-10 grid items-stretch gap-6 lg:grid-cols-[1fr_1fr]">
-            {/* Feature cards */}
+            { }
             <AlternatingTimeline items={FEATURES} />
 
-            {/* Image panel with banner */}
+            { }
             <div className="relative min-h-72 overflow-hidden rounded-2xl bg-gradient-to-br from-primary/10 to-primary/30">
 
-              {/* Mobile & Tablet Image */}
+              { }
               <Image
                 src="/trust-img-7.png"
                 alt="FixMate technicians at work"
@@ -127,7 +123,7 @@ export default function CategoriesAndTrust() {
                 className="object-cover lg:hidden"
               />
 
-              {/* Desktop Image */}
+              { }
               <Image
                 src="/trust-img-7-lg.png"
                 alt="FixMate technicians at work"
@@ -147,11 +143,11 @@ export default function CategoriesAndTrust() {
           </div>
         </div>
 
-        {/* Stats strip */}
+        { }
         {STAT_TILES.length > 0 && (
           <div className="mx-auto mt-16 max-w-6xl px-4 sm:mt-24">
             <div className="relative overflow-hidden rounded-3xl border border-brand-primary/15 bg-gradient-to-br from-white via-brand-primary/[0.02] to-brand-secondary/[0.03] shadow-[0_20px_50px_-15px_rgba(21,65,90,0.12)]">
-              {/* Subtle Top Gradient Accent Line */}
+              { }
               <div
                 aria-hidden="true"
                 className="h-1 w-full bg-brand-primary/[0.01]"
@@ -166,7 +162,7 @@ export default function CategoriesAndTrust() {
                       key={label}
                       className="group relative flex flex-col items-center justify-center px-6 py-9 text-center transition-colors duration-300 hover:bg-brand-primary/[0.025] sm:py-11"
                     >
-                      {/* Small Indicator Pill */}
+                      { }
                       <span
                         aria-hidden="true"
                         className={`mb-3 h-1.5 w-6 rounded-full transition-all duration-300 group-hover:w-10 bg-brand-primary/70

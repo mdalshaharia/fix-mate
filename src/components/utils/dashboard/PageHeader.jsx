@@ -1,4 +1,3 @@
-// components/dashboard/PageHeader.jsx
 export default function PageHeader({ title, description, action }) {
   return (
     <header className="mb-6 flex items-start justify-between gap-4">

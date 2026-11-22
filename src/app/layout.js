@@ -33,7 +33,7 @@ const lato = Lato({
 
 const pacifico = Pacifico({
   variable: "--font-pacifico",
-  weight: "400", // Pacifico only has a 400 weight
+  weight: "400",
   subsets: ["latin"],
 });
 
@@ -43,7 +43,7 @@ export const metadata = {
     template: "FixMate | %s",
   },
   icons: {
-    icon: "/favicon1.png", // points to public/logo.png
+    icon: "/favicon1.png",
   },
   description:
     "Find trusted local technicians and book reliable home, appliance, and device repairs with FixMate.",
@@ -58,9 +58,9 @@ export default function RootLayout({ children }) {
     >
       <body className="min-h-full flex flex-col">
         <Toaster></Toaster>
-        {/* <Toaster richColors /> */}
+        { }
         {children}
-        {/* <Footer></Footer> */}
+        { }
         </body>
     </html>
   );

@@ -1,4 +1,3 @@
-// components/dashboard/StatsCard.jsx
 import { Skeleton } from "@/components/ui/skeleton";
 
 export default function StatsCard({ label, value, icon: Icon, loading }) {

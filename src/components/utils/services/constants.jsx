@@ -8,7 +8,6 @@ import {
   Zap,
 } from "lucide-react";
 
-// `value` must match the category stored in MongoDB
 export const CATEGORIES = [
   { value: "Smartphone", icon: Smartphone },
   { value: "Laptop", icon: Laptop },
@@ -19,7 +18,6 @@ export const CATEGORIES = [
   { value: "Electrical", icon: Zap },
 ];
 
-// `value` must match serviceMode stored in MongoDB
 export const SERVICE_MODES = ["Home Visit", "Shop Drop-off"];
 
 export const SORT_OPTIONS = [

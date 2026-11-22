@@ -7,14 +7,12 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-// import { uploadImage } from "@/lib/uploadImage";
 import { cn } from "@/lib/utils";
 import { uploadImageToImgBB } from "@/lib/uploadImage";
 
 const ALLOWED_TYPES = ["image/jpeg", "image/png"];
 const MAX_SIZE_MB = 5;
 
-// Controlled by the parent form: `value` is the uploaded image URL ("" when empty)
 export default function ImageUploader({ value, onChange, uploading, onUploadingChange }) {
   const [dragging, setDragging] = useState(false);
   const [copied, setCopied] = useState(false);
@@ -49,17 +47,15 @@ export default function ImageUploader({ value, onChange, uploading, onUploadingC
       toast.success("Link copied");
       setTimeout(() => setCopied(false), 2000);
     } catch {
-      // Clipboard API needs https or localhost
       toast.error("Could not copy. Select the link and copy it manually.");
     }
   }
 
-  // After a successful upload: show the image, its link and a copy button
   if (value) {
     return (
       <div className="space-y-3">
         <div className="relative aspect-video overflow-hidden rounded-xl border bg-muted">
-          {/* unoptimized: the image host is external, so no next.config entry is needed for this preview */}
+          { }
           <Image src={value} alt="Uploaded service image" fill unoptimized className="object-cover" />
         </div>
 
@@ -99,7 +95,6 @@ export default function ImageUploader({ value, onChange, uploading, onUploadingC
     );
   }
 
-  // Empty state: the drop zone (the label makes the whole area clickable)
   return (
     <label
       htmlFor="image"
@@ -127,7 +122,7 @@ export default function ImageUploader({ value, onChange, uploading, onUploadingC
         disabled={uploading}
         onChange={(e) => {
           handleFile(e.target.files[0]);
-          e.target.value = ""; // lets the same file be picked again
+          e.target.value = "";
         }}
       />
       <span className="flex size-10 items-center justify-center rounded-full bg-background text-primary">

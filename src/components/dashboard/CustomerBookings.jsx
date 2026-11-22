@@ -29,7 +29,6 @@ import PageHeader from "../utils/dashboard/PageHeader";
 import { PaymentBadge, StatusBadge } from "../utils/dashboard/StatusBadge";
 import { authorizedFetch } from "@/lib/getTokenFromClient";
 
-// Dates are saved at UTC midnight, so format in UTC to avoid showing the wrong day
 const formatDate = (value) =>
   new Date(value).toLocaleDateString("en-GB", {
     day: "numeric",
@@ -38,7 +37,6 @@ const formatDate = (value) =>
     timeZone: "UTC",
   });
 
-// Final amount once the job is completed, otherwise the estimated base price
 const formatAmount = (b) => (b.status === "completed" ? `$${b.finalAmount}` : `Est. $${b.basePrice}`);
 
 function ServiceCell({ booking }) {
@@ -60,7 +58,6 @@ function ServiceCell({ booking }) {
 }
 
 function PaymentCell({ booking }) {
-  // Payment only matters once the job is completed
   if (booking.status !== "completed") return <span className="text-muted-foreground">—</span>;
   return <PaymentBadge paymentStatus={booking.paymentStatus} />;
 }
@@ -87,7 +84,7 @@ function BookingActions({ booking, payingId, onCancel, onPay }) {
     );
   }
 
-  return null; // a paid booking shows the Paid badge instead of a button
+  return null;
 }
 
 export default function CustomerBookings({ payment, sessionId }) {
@@ -126,7 +123,6 @@ export default function CustomerBookings({ payment, sessionId }) {
     };
   }, [loadBookings, payment]);
 
-  // Coming back from Stripe Checkout: verify the session, then refresh the list.
   useEffect(() => {
     if (!payment) return;
 
@@ -179,7 +175,7 @@ export default function CustomerBookings({ payment, sessionId }) {
       toast.success("Request cancelled");
     } catch (err) {
       toast.error(err.message);
-      loadBookings(); // the list may be out of date (e.g. the technician just accepted)
+      loadBookings();
     } finally {
       setCancelling(false);
       setCancelTarget(null);
@@ -200,7 +196,7 @@ export default function CustomerBookings({ payment, sessionId }) {
         throw new Error(data.message || "Could not start payment");
       }
 
-      window.location.assign(data.url); // go to Stripe Checkout
+      window.location.assign(data.url);
     } catch (err) {
       toast.error(err.message);
       setPayingId(null);
@@ -235,7 +231,7 @@ export default function CustomerBookings({ payment, sessionId }) {
         </div>
       ) : (
         <>
-          {/* Table: tablet and desktop */}
+          { }
           <div className="hidden overflow-hidden rounded-xl border bg-card md:block">
             <Table>
               <TableHeader>
@@ -267,7 +263,7 @@ export default function CustomerBookings({ payment, sessionId }) {
             </Table>
           </div>
 
-          {/* Cards: mobile */}
+          { }
           <div className="space-y-3 md:hidden">
             {bookings.map((b) => (
               <article key={b._id} className="space-y-3 rounded-xl border bg-card p-4">
@@ -301,7 +297,7 @@ export default function CustomerBookings({ payment, sessionId }) {
         </>
       )}
 
-      {/* Cancel confirmation */}
+      { }
       <AlertDialog
         open={!!cancelTarget}
         onOpenChange={(open) => {
@@ -320,7 +316,7 @@ export default function CustomerBookings({ payment, sessionId }) {
             <AlertDialogAction
               disabled={cancelling}
               onClick={(e) => {
-                e.preventDefault(); // keep the dialog open until the request finishes
+                e.preventDefault();
                 confirmCancel();
               }}
             >

@@ -17,12 +17,10 @@ import { authorizedFetch } from "@/lib/getTokenFromClient";
 import StatsCard from "../utils/dashboard/StatsCard";
 import { PaymentBadge } from "../utils/dashboard/StatusBadge";
 
-// Shows only the last 4 characters; the full id is in the tooltip
 const maskId = (id) => (id ? `pi_••••${id.slice(-4)}` : "—");
 
 const formatMoney = (value, currency = "USD") => {
     let code = String(currency || "USD").toUpperCase();
-    // Intl throws on unknown codes; fall back to USD
     try {
         return new Intl.NumberFormat("en-US", { style: "currency", currency: code }).format(value);
     } catch {
@@ -74,7 +72,6 @@ export default function Transactions() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
 
-    // `ignore` drops answers from outdated requests
     useEffect(() => {
         let ignore = false;
 
@@ -95,7 +92,6 @@ export default function Transactions() {
                 });
                 setError("");
             } catch (err) {
-                // authorizedFetch is already signing the user out and redirecting
                 if (ignore || err.message?.startsWith("session-expired")) return;
                 setError(err.message);
             } finally {
@@ -126,7 +122,7 @@ export default function Transactions() {
 
     return (
         <>
-            {/* Totals cover every payment, not only the current page */}
+            { }
             <div className="mb-6 grid gap-4 sm:grid-cols-3">
                 {cards.map((card) => (
                     <StatsCard key={card.label} {...card} loading={loading} />
@@ -149,7 +145,7 @@ export default function Transactions() {
                 </div>
             ) : (
                 <>
-                    {/* Table: wide screens (7 columns need room) */}
+                    { }
                     <div className="hidden overflow-hidden rounded-xl border bg-card xl:block">
                         <Table>
                             <TableHeader>
@@ -179,7 +175,7 @@ export default function Transactions() {
                         </Table>
                     </div>
 
-                    {/* Cards: mobile, tablet and small laptops */}
+                    { }
                     <div className="space-y-3 xl:hidden">
                         {payments.map((p) => (
                             <article key={p._id} className="space-y-3 rounded-xl border bg-card p-4">
@@ -214,7 +210,7 @@ export default function Transactions() {
                         ))}
                     </div>
 
-                    {/* Pagination */}
+                    { }
                     {data.totalPages > 1 && (
                         <nav aria-label="Pagination" className="mt-4 flex items-center justify-between">
                             <Button variant="outline" size="sm" disabled={page <= 1} onClick={() => goToPage(page - 1)}>

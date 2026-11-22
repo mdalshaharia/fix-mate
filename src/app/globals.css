@@ -12,14 +12,11 @@
   --font-mono: var(--font-geist-mono);
   --font-heading: var(--font-roboto, var(--font-sans));
 
-  /* Individual font families — use as: font-inter, font-roboto, font-lato */
   --font-inter: var(--font-inter);
   --font-roboto: var(--font-roboto);
   --font-lato: var(--font-lato);
   --font-pacifico: var(--font-pacifico);
 
-  /* Brand colors — available as Tailwind classes:
-     bg-brand-primary, text-brand-primary, border-brand-primary, etc. */
   --color-brand-primary: var(--brand-primary);
   --color-brand-primary-light: var(--brand-primary-light);
   --color-brand-primary-lighter: var(--brand-primary-lighter);
@@ -69,25 +66,19 @@
 }
 
 :root {
-  /* ═══════════════════════════════════════════════════════
-     🎨 BRAND COLORS — Change these to retheme the whole site
-     ═══════════════════════════════════════════════════════ */
-  --brand-primary: #15415a;           /* Deep teal navy */
-  --brand-primary-light: #1c5878;     /* Lighter tint for hovers */
-  --brand-primary-lighter: #e8f0f4;   /* Very light tint for backgrounds */
-  --brand-primary-foreground: #ffffff; /* Text on primary */
+  --brand-primary: #15415a;
+  --brand-primary-light: #1c5878;
+  --brand-primary-lighter: #e8f0f4;
+  --brand-primary-foreground: #ffffff;
 
-  --brand-secondary: #4c191d;           /* Dark burgundy/maroon */
-  --brand-secondary-light: #6b2328;     /* Lighter tint for hovers */
-  --brand-secondary-lighter: #f5e8e9;   /* Very light tint for backgrounds */
-  --brand-secondary-foreground: #ffffff; /* Text on secondary */
+  --brand-secondary: #4c191d;
+  --brand-secondary-light: #6b2328;
+  --brand-secondary-lighter: #f5e8e9;
+  --brand-secondary-foreground: #ffffff;
 
-  --brand-accent: #c9513f;            /* Warm accent derived from secondary */
-  --brand-accent-light: #d4695a;      /* Lighter accent for hovers */
+  --brand-accent: #c9513f;
+  --brand-accent-light: #d4695a;
 
-  /* ═══════════════════════════════════════════════════════
-     Shadcn/Tailwind Design Tokens (derived from brand)
-     ═══════════════════════════════════════════════════════ */
   --background: oklch(0.985 0.002 250);
   --foreground: oklch(0.185 0.02 230);
   --card: oklch(1 0 0);

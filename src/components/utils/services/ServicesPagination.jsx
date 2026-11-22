@@ -8,7 +8,6 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 
-// Example: current 5 of 10 -> [1, "gap-4", 4, 5, 6, "gap-7", 10]
 function getPageNumbers(current, total) {
   const wanted = [...new Set([1, current - 1, current, current + 1, total])]
     .filter((p) => p >= 1 && p <= total)
@@ -25,7 +24,6 @@ function getPageNumbers(current, total) {
 export default function ServicesPagination({ page, totalPages, params }) {
   if (totalPages <= 1) return null;
 
-  // Keep all current filters, only change the page
   function buildHref(targetPage) {
     const qs = new URLSearchParams();
     Object.entries(params).forEach(([key, value]) => {

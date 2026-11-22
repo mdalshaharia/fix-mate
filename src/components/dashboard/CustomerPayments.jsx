@@ -18,7 +18,6 @@ import StatsCard from "../utils/dashboard/StatsCard";
 import { PaymentBadge } from "../utils/dashboard/StatusBadge";
 import { authorizedFetch } from "@/lib/getTokenFromClient";
 
-// Long ids are shortened; the full id is in the tooltip and is what gets copied
 
 const formatJoinedDate = (value) => {
     if (!value) return "—";
@@ -34,7 +33,6 @@ const formatJoinedDate = (value) => {
 
 const formatMoney = (value, currency = "USD") => {
     let code = String(currency || "USD").toUpperCase();
-    // Intl throws on unknown codes; fall back to USD
     try {
         return new Intl.NumberFormat("en-US", { style: "currency", currency: code }).format(value ?? 0);
     } catch {
@@ -83,7 +81,6 @@ export default function CustomerPayments({ payment, sessionId }) {
     const [payingId, setPayingId] = useState(null);
     const [reloadKey, setReloadKey] = useState(0);
 
-    // `ignore` drops answers from outdated requests
     useEffect(() => {
         let ignore = false;
 
@@ -103,7 +100,6 @@ export default function CustomerPayments({ payment, sessionId }) {
                 });
                 setError("");
             } catch (err) {
-                // authorizedFetch is already signing the user out and redirecting
                 if (ignore || err.message?.startsWith("session-expired")) return;
                 setError(err.message);
             } finally {
@@ -117,7 +113,6 @@ export default function CustomerPayments({ payment, sessionId }) {
         };
     }, [page, reloadKey]);
 
-    // Coming back from Stripe Checkout: verify the session, then refresh
     useEffect(() => {
         if (!payment) return;
 
@@ -182,7 +177,7 @@ export default function CustomerPayments({ payment, sessionId }) {
                 throw new Error(result.message || "Could not start payment");
             }
 
-            window.location.assign(result.url); // go to Stripe Checkout
+            window.location.assign(result.url);
         } catch (err) {
             if (!err.message?.startsWith("session-expired")) toast.error(err.message);
             setPayingId(null);
@@ -204,7 +199,7 @@ export default function CustomerPayments({ payment, sessionId }) {
                 ))}
             </div>
 
-            {/* Payments due */}
+            { }
             {data.dueBookings.length > 0 && (
                 <section
                     aria-labelledby="due-title"
@@ -243,7 +238,7 @@ export default function CustomerPayments({ payment, sessionId }) {
                 </section>
             )}
 
-            {/* Payment history */}
+            { }
             <h2 className="mb-3 text-sm font-bold">Payment history</h2>
 
             {loading ? (
@@ -265,7 +260,7 @@ export default function CustomerPayments({ payment, sessionId }) {
                 </div>
             ) : (
                 <>
-                    {/* Table: desktop */}
+                    { }
                     <div className="hidden overflow-hidden rounded-xl border bg-card lg:block">
                         <Table>
                             <TableHeader>
@@ -293,7 +288,7 @@ export default function CustomerPayments({ payment, sessionId }) {
                         </Table>
                     </div>
 
-                    {/* Cards: mobile and tablet */}
+                    { }
                     <div className="space-y-3 lg:hidden">
                         {data.payments.map((p) => (
                             <article key={p._id} className="space-y-3 rounded-xl border bg-card p-4">
@@ -323,7 +318,7 @@ export default function CustomerPayments({ payment, sessionId }) {
                         ))}
                     </div>
 
-                    {/* Pagination */}
+                    { }
                     {data.totalPages > 1 && (
                         <nav aria-label="Pagination" className="mt-4 flex items-center justify-between">
                             <Button variant="outline" size="sm" disabled={page <= 1} onClick={() => goToPage(page - 1)}>

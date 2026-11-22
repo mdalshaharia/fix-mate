@@ -9,7 +9,6 @@ import Topbar from "@/components/dashboard/Topbar";
 import { MENU } from "./dashboardMenu";
 import { useSession } from "@/lib/auth-client";
 
-// Mirrors the shell layout so the first paint keeps the same shape
 function DashboardSkeleton() {
   return (
     <div aria-busy="true" aria-label="Loading dashboard" className="min-h-screen bg-muted/30">
@@ -59,8 +58,6 @@ export default function DashboardShell({ children }) {
   const { data: user, isPending: loading } = useSession();
   const [menuOpen, setMenuOpen] = useState(false);
 
-  // Each role only sees its own area: /dashboard/customer, /dashboard/technician, ...
-  // /dashboard/profile is shared by every role.
   const home = user?.user && MENU[user?.user?.role] ? `/dashboard/${user?.user.role}` : null;
   const isProfile = pathname === "/dashboard/profile" || pathname.startsWith("/dashboard/profile/");
   const allowed = !!home && (isProfile || pathname === home || pathname.startsWith(`${home}/`));
@@ -68,20 +65,20 @@ export default function DashboardShell({ children }) {
   useEffect(() => {
     if (loading) return;
     if (!user) router.replace(`/sign-in?callbackUrl=${encodeURIComponent(pathname)}`);
-    else if (!home) router.replace("/"); // unknown role
-    else if (!allowed) router.replace(home); // e.g. a customer opening /dashboard/admin
+    else if (!home) router.replace("/");
+    else if (!allowed) router.replace(home);
   }, [loading, user, home, allowed, pathname, router]);
 
   if (loading || !allowed) return <DashboardSkeleton />;
 
   return (
     <div className="min-h-screen bg-muted/30">
-      {/* Desktop sidebar */}
+      { }
       <aside className="fixed inset-y-0 left-0 z-40 hidden w-64 border-r bg-card lg:block">
         <SidebarNav role={user?.user.role} />
       </aside>
 
-      {/* Mobile / tablet sidebar */}
+      { }
       <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
         <SheetContent side="left" className="w-64 p-0">
           <SheetTitle className="sr-only">Navigation menu</SheetTitle>

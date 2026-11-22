@@ -44,7 +44,7 @@ const isSessionError = (message = "") =>
   message.includes("session-expired") || message.includes("Unauthorized");
 
 const toastError = (message) => {
-  if (isSessionError(message)) return; // handleExpiredSession already toasts + redirects
+  if (isSessionError(message)) return;
   toast.error(message);
 };
 
@@ -75,7 +75,6 @@ function TechnicianCell({ service }) {
     );
 }
 
-// Shows only the button(s) that make sense for the current status
 function ApprovalActions({ service, busy, onDecide }) {
     return (
         <div className="flex gap-2">
@@ -100,7 +99,7 @@ function ApprovalActions({ service, busy, onDecide }) {
 }
 
 export default function ServiceApproval() {
-    const [status, setStatus] = useState("pending"); // pending services are shown first
+    const [status, setStatus] = useState("pending");
     const [page, setPage] = useState(1);
     const [data, setData] = useState({ services: [], total: 0, totalPages: 1 });
     const [loading, setLoading] = useState(true);
@@ -108,7 +107,6 @@ export default function ServiceApproval() {
     const [reloadKey, setReloadKey] = useState(0);
     const [busyId, setBusyId] = useState(null);
 
-    // Filtering, sorting and paging happen on the server; `ignore` drops outdated answers
     useEffect(() => {
         let ignore = false;
         const query = new URLSearchParams({ page, limit: 10 });
@@ -121,7 +119,6 @@ export default function ServiceApproval() {
                 if (ignore) return;
                 if (!res.ok) throw new Error(payload?.message || "Failed to load services");
                 const services = Array.isArray(payload?.services) ? payload.services : [];
-                // The last item on a page was just handled: step back one page
                 if (services.length === 0 && page > 1) {
                     setPage(page - 1);
                     return;
@@ -174,7 +171,7 @@ export default function ServiceApproval() {
             toastError(err.message);
         } finally {
             setBusyId(null);
-            setReloadKey((key) => key + 1); // reload so the list matches the filter
+            setReloadKey((key) => key + 1);
         }
     }
 
@@ -182,7 +179,7 @@ export default function ServiceApproval() {
 
     return (
         <>
-            {/* Approval filter */}
+            { }
             <div className="mb-4 flex flex-wrap gap-2" role="group" aria-label="Filter by approval status">
                 {FILTERS.map((filter) => (
                     <button
@@ -220,7 +217,7 @@ export default function ServiceApproval() {
                 <>
                     <p className="mb-3 text-xs text-muted-foreground">{data.total} services</p>
 
-                    {/* Table: wide screens */}
+                    { }
                     <div className="hidden overflow-hidden rounded-xl border bg-card lg:block">
                         <Table>
                             <TableHeader>
@@ -250,7 +247,7 @@ export default function ServiceApproval() {
                         </Table>
                     </div>
 
-                    {/* Cards: mobile and tablet */}
+                    { }
                     <div className="space-y-3 lg:hidden">
                         {data.services.map((s) => (
                             <article key={s._id} className="space-y-3 rounded-xl border bg-card p-4">
@@ -272,7 +269,7 @@ export default function ServiceApproval() {
                         ))}
                     </div>
 
-                    {/* Pagination */}
+                    { }
                     {data.totalPages > 1 && (
                         <nav aria-label="Pagination" className="mt-4 flex items-center justify-between">
                             <Button variant="outline" size="sm" disabled={page <= 1} onClick={() => goToPage(page - 1)}>

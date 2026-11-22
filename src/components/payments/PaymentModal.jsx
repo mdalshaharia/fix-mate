@@ -8,8 +8,6 @@ const TONES = {
   error: { icon: XCircle, color: "text-destructive", ring: "bg-red-100" },
 };
 
-// Fixed at the top of the screen over a dimmed backdrop.
-// `closeHref` is where the X button and the backdrop lead.
 export default function PaymentModal({ tone = "success", title, message, details = [], actions = [], closeHref }) {
   const { icon: Icon, color, ring } = TONES[tone];
 

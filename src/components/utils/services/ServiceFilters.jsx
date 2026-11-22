@@ -25,7 +25,6 @@ export default function ServiceFilters() {
 
   const [searchText, setSearchText] = useState(searchParams.get("search") || "");
 
-  // Update the URL; any filter change resets to page 1
   function updateParams(key, value) {
     const params = new URLSearchParams(searchParams.toString());
 
@@ -36,18 +35,16 @@ export default function ServiceFilters() {
     router.push(`${pathname}?${params.toString()}`, { scroll: false });
   }
 
-  // Debounce typing so we don't hit the server on every keystroke
   useEffect(() => {
     if (searchText === (searchParams.get("search") || "")) return;
     const timer = setTimeout(() => updateParams("search", searchText.trim()), 400);
     return () => clearTimeout(timer);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchText]);
 
   return (
     <section className="space-y-4">
       <div className="grid gap-4 rounded-2xl border bg-card p-5 shadow-sm md:grid-cols-4">
-        {/* Search */}
+        { }
         <div className="space-y-1.5">
           <label htmlFor="search" className="text-xs font-semibold">Search</label>
           <div className="relative">
@@ -62,7 +59,7 @@ export default function ServiceFilters() {
           </div>
         </div>
 
-        {/* Category */}
+        { }
         <div className="space-y-1.5">
           <label htmlFor="category" className="text-xs font-semibold">Category</label>
           <Select value={category} onValueChange={(v) => updateParams("category", v)}>
@@ -78,7 +75,7 @@ export default function ServiceFilters() {
           </Select>
         </div>
 
-        {/* Service mode */}
+        { }
         <div className="space-y-1.5">
           <label htmlFor="serviceMode" className="text-xs font-semibold">Service mode</label>
           <Select value={serviceMode} onValueChange={(v) => updateParams("serviceMode", v)}>
@@ -94,7 +91,7 @@ export default function ServiceFilters() {
           </Select>
         </div>
 
-        {/* Sort */}
+        { }
         <div className="space-y-1.5">
           <label htmlFor="sort" className="text-xs font-semibold">Sort by</label>
           <Select value={sort} onValueChange={(v) => updateParams("sort", v)}>
@@ -110,7 +107,7 @@ export default function ServiceFilters() {
         </div>
       </div>
 
-      {/* Category chips (same "category" param as the dropdown) */}
+      { }
       <div className="flex flex-wrap gap-2">
         {[{ value: "all", label: "All" }, ...CATEGORIES.map((c) => ({ value: c.value, label: c.value }))].map(
           (chip) => (

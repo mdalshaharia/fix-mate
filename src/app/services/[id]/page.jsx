@@ -15,7 +15,7 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function ServiceDetailsPage({ params }) {
-  const { id } = await params; // async in Next.js 15+
+  const { id } = await params;
   const service = await getService(id);
   if (!service) notFound();
 
@@ -35,7 +35,7 @@ export default async function ServiceDetailsPage({ params }) {
 
   return (
     <main className="mx-auto max-w-7xl px-4 py-10">
-      {/* Breadcrumb */}
+      { }
       <nav aria-label="Breadcrumb" className="text-xs text-muted-foreground">
         <Link href="/services" className="hover:underline">Services</Link>
         {" / "}
@@ -47,7 +47,7 @@ export default async function ServiceDetailsPage({ params }) {
       </nav>
 
       <div className="mt-6 grid gap-8 lg:grid-cols-[1fr_400px]">
-        {/* Left: service information */}
+        { }
         <div className="space-y-8">
           <div className="relative flex aspect-[16/10] items-center justify-center overflow-hidden rounded-2xl border border-border bg-primary/5">
             {image ? (
@@ -103,7 +103,7 @@ export default async function ServiceDetailsPage({ params }) {
           </section>
         </div>
 
-        {/* Right: request form */}
+        { }
         <aside className="lg:sticky lg:top-6 lg:self-start">
           <BookingForm service={service} isAvailable={isAvailable} />
         </aside>

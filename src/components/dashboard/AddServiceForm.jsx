@@ -34,7 +34,6 @@ const INITIAL_FORM = {
     description: "",
 };
 
-// Turns a saved service into form values (numbers become strings for the inputs)
 const toFormState = (service) => ({
     title: service.title ?? "",
     category: service.category ?? "",
@@ -45,7 +44,6 @@ const toFormState = (service) => ({
     description: service.description ?? "",
 });
 
-// Same rules as the server (the server is the real check)
 function validate(form) {
     const errors = {};
     const price = Number(form.basePrice);
@@ -62,7 +60,6 @@ function validate(form) {
     return errors;
 }
 
-// Label + input + error message
 function Field({ id, label, error, className, children }) {
     return (
         <div className={cn("space-y-1.5", className)}>
@@ -84,7 +81,6 @@ export default function AddServiceForm({ service }) {
     const [submitting, setSubmitting] = useState(false);
 
 
-    // Updates a field and clears its error message
     function setField(name, value) {
         setForm((prev) => ({ ...prev, [name]: value }));
         setErrors((prev) => ({ ...prev, [name]: undefined }));
@@ -120,7 +116,7 @@ export default function AddServiceForm({ service }) {
                     description: "It will appear after an admin approves it.",
                 });
             }
-            router.push(SERVICES_URL); // stay in the "submitting" state while navigating
+            router.push(SERVICES_URL);
         } catch (error) {
             toast.error(error.message || "Failed to save service");
             setSubmitting(false);
@@ -133,7 +129,7 @@ export default function AddServiceForm({ service }) {
             noValidate
             className="grid items-start gap-6 lg:grid-cols-[minmax(0,1fr)_360px]"
         >
-            {/* Fields */}
+            { }
             <section className="space-y-4 rounded-2xl border bg-card p-5 shadow-sm sm:p-6 lg:col-start-1 lg:row-start-1">
                 <Field id="title" label="Service title" error={errors.title}>
                     <Input
@@ -227,7 +223,7 @@ export default function AddServiceForm({ service }) {
                 </Field>
             </section>
 
-            {/* Image + notice */}
+            { }
             <aside className="space-y-4 lg:col-start-2 lg:row-span-2 lg:row-start-1">
                 <section className="space-y-3 rounded-2xl border bg-card p-5 shadow-sm">
                     <h2 className="text-sm font-bold">Service image</h2>
@@ -254,7 +250,7 @@ export default function AddServiceForm({ service }) {
                 </p>
             </aside>
 
-            {/* Actions (last on mobile, under the fields on desktop) */}
+            { }
             <div className="flex gap-3 lg:col-start-1 lg:row-start-2">
                 <Button type="submit" disabled={submitting || uploading}>
                     {submitting ? "Saving..." : isEdit ? "Save Changes" : "Submit for Approval"}

@@ -11,7 +11,7 @@ const client = new MongoClient(process.env.DB_URL);
 const db = client.db('fix-mate');
 export const auth = betterAuth({
   secret,
-  trustedOrigins: ["http://localhost:3000", "https://studio-space-ivory.vercel.app"],
+  trustedOrigins: ["http://localhost:3000", process.env.BETTER_AUTH_URL].filter(Boolean),
   rateLimit: {
     enabled: true,
     window: 60,
@@ -25,14 +25,11 @@ export const auth = betterAuth({
   },
   emailAndPassword: {
     enabled: true,
-    autoSignIn: true
+    autoSignIn: false,
   },
   user: {
     additionalFields: {
       role: {
-        // "string" (not an array) so better-auth can actually validate;
-        // input stays true so the sign-up form can still pick technician.
-        // databaseHooks below make "admin" impossible via self-signup.
         type: "string",
         input: true,
         defaultValue: "customer",
@@ -48,14 +45,11 @@ export const auth = betterAuth({
         before: async (user) => ({
           data: {
             ...user,
-            // Only customer/technician via signup; admins are promoted later
-            // through the admin dashboard (or a one-time DB update).
             role: user.role === "technician" ? "technician" : "customer",
           },
         }),
       },
       update: {
-        // SECURITY: a user must never be able to change their own role from the client
         before: async ({ role, ...data }) => ({
           data: {
             ...data,

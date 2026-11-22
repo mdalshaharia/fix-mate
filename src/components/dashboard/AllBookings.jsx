@@ -38,7 +38,6 @@ const FILTERS = [
 const isSessionError = (message = "") =>
     message.includes("session-expired") || message.includes("Unauthorized");
 
-// The final amount only exists once the job is completed
 const formatAmount = (b) => (b.status === "completed" ? `$${b.finalAmount}` : `Est. $${b.basePrice}`);
 
 function ServiceCell({ booking }) {
@@ -68,7 +67,6 @@ function PersonCell({ name, email }) {
     );
 }
 
-// Payment only matters once the job is completed
 function PaymentCell({ booking }) {
     if (booking.status !== "completed") return <span className="text-muted-foreground">—</span>;
     return <PaymentBadge paymentStatus={booking.paymentStatus} />;
@@ -81,7 +79,6 @@ export default function AllBookings() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
 
-    // Filtering and paging happen on the server; `ignore` drops outdated answers
     useEffect(() => {
         let ignore = false;
         const query = new URLSearchParams({ page, limit: 10 });
@@ -128,7 +125,7 @@ export default function AllBookings() {
 
     return (
         <>
-            {/* Status filter */}
+            { }
             <div className="mb-4 flex flex-wrap gap-2" role="group" aria-label="Filter by status">
                 {FILTERS.map((filter) => (
                     <button
@@ -166,7 +163,7 @@ export default function AllBookings() {
                 <>
                     <p className="mb-3 text-xs text-muted-foreground">{data.total} bookings</p>
 
-                    {/* Table: wide screens (7 columns need room) */}
+                    { }
                     <div className="hidden overflow-hidden rounded-xl border bg-card xl:block">
                         <Table>
                             <TableHeader>
@@ -196,7 +193,7 @@ export default function AllBookings() {
                         </Table>
                     </div>
 
-                    {/* Cards: mobile, tablet and small laptops */}
+                    { }
                     <div className="space-y-3 xl:hidden">
                         {data.bookings.map((b) => (
                             <article key={b._id} className="space-y-3 rounded-xl border bg-card p-4">
@@ -229,7 +226,7 @@ export default function AllBookings() {
                         ))}
                     </div>
 
-                    {/* Pagination */}
+                    { }
                     {data.totalPages > 1 && (
                         <nav aria-label="Pagination" className="mt-4 flex items-center justify-between">
                             <Button variant="outline" size="sm" disabled={page <= 1} onClick={() => goToPage(page - 1)}>

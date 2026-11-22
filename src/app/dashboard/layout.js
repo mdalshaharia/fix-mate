@@ -1,4 +1,3 @@
-// app/dashboard/layout.jsx
 
 import DashboardShell from "@/components/dashboard/DashboardShell";
 

@@ -47,7 +47,7 @@ const isSessionError = (message = "") =>
   message.includes("session-expired") || message.includes("Unauthorized");
 
 const toastError = (message) => {
-  if (isSessionError(message)) return; // handleExpiredSession already toasts + redirects
+  if (isSessionError(message)) return;
   toast.error(message);
 };
 
@@ -74,7 +74,6 @@ function UserCell({ user, isSelf }) {
   );
 }
 
-// The select only asks for a change; the role updates after the admin confirms
 function RoleSelect({ user, isSelf, onChange }) {
   return (
     <Select
@@ -115,11 +114,10 @@ export default function ManageUsers() {
   const [error, setError] = useState("");
   const [reloadKey, setReloadKey] = useState(0);
 
-  const [pendingChange, setPendingChange] = useState(null); // { user, role }
-  const [pendingBan, setPendingBan] = useState(null); // { user, banned }
+  const [pendingChange, setPendingChange] = useState(null);
+  const [pendingBan, setPendingBan] = useState(null);
   const [saving, setSaving] = useState(false);
 
-  // `ignore` drops answers from outdated requests
   useEffect(() => {
     let ignore = false;
 
@@ -242,7 +240,7 @@ export default function ManageUsers() {
     <>
       <p className="mb-3 text-xs text-muted-foreground">{data.total} users</p>
 
-      {/* Table: tablet and desktop */}
+      { }
       <div className="hidden overflow-hidden rounded-xl border bg-card md:block">
         <Table>
           <TableHeader>
@@ -277,7 +275,7 @@ export default function ManageUsers() {
         </Table>
       </div>
 
-      {/* Cards: mobile */}
+      { }
       <div className="space-y-3 md:hidden">
         {data.users.map((u) => (
           <article key={u._id} className="space-y-3 rounded-xl border bg-card p-4">
@@ -303,7 +301,7 @@ export default function ManageUsers() {
         ))}
       </div>
 
-      {/* Pagination */}
+      { }
       {data.totalPages > 1 && (
         <nav aria-label="Pagination" className="mt-4 flex items-center justify-between">
           <Button variant="outline" size="sm" disabled={page <= 1} onClick={() => goToPage(page - 1)}>
@@ -323,7 +321,7 @@ export default function ManageUsers() {
         </nav>
       )}
 
-      {/* Role change confirmation */}
+      { }
       <AlertDialog
         open={!!pendingChange}
         onOpenChange={(open) => {
@@ -345,7 +343,7 @@ export default function ManageUsers() {
             <AlertDialogAction
               disabled={saving}
               onClick={(e) => {
-                e.preventDefault(); // keep the dialog open until the request finishes
+                e.preventDefault();
                 confirmRoleChange();
               }}
             >
@@ -355,7 +353,7 @@ export default function ManageUsers() {
         </AlertDialogContent>
       </AlertDialog>
 
-      {/* Ban / unban confirmation */}
+      { }
       <AlertDialog
         open={!!pendingBan}
         onOpenChange={(open) => {

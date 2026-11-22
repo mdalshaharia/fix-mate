@@ -113,7 +113,6 @@ export default function MyServices() {
   const setAvailability = (id, isAvailable) =>
     setServices((prev) => prev.map((s) => (s._id === id ? { ...s, isAvailable } : s)));
 
-  // Optimistic: the switch moves right away and rolls back if the server refuses
   async function handleToggle(service) {
     const next = !service.isAvailable;
     setAvailability(service._id, next);
@@ -180,7 +179,7 @@ export default function MyServices() {
 
   return (
     <>
-      {/* Table: tablet and desktop */}
+      { }
       <div className="hidden overflow-hidden rounded-xl border bg-card md:block">
         <Table>
           <TableHeader>
@@ -208,7 +207,7 @@ export default function MyServices() {
         </Table>
       </div>
 
-      {/* Cards: mobile */}
+      { }
       <div className="space-y-3 md:hidden">
         {services.map((s) => (
           <article key={s._id} className="space-y-3 rounded-xl border bg-card p-4">
@@ -226,7 +225,7 @@ export default function MyServices() {
         ))}
       </div>
 
-      {/* Delete confirmation */}
+      { }
       <AlertDialog
         open={!!deleteTarget}
         onOpenChange={(open) => {
@@ -246,7 +245,7 @@ export default function MyServices() {
             <AlertDialogAction
               disabled={deleting}
               onClick={(e) => {
-                e.preventDefault(); // keep the dialog open until the request finishes
+                e.preventDefault();
                 confirmDelete();
               }}
             >

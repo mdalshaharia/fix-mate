@@ -5,7 +5,6 @@ import { getFeaturedServices } from "@/lib/getFeaturedServices";
 export default async function FeaturedServices() {
   const services = await getFeaturedServices();
 
-  // Nothing to show yet: skip the section instead of rendering an empty block
   if (services.length === 0) return null;
 
   return (
@@ -25,7 +24,7 @@ export default async function FeaturedServices() {
           </Link>
         </header>
 
-        {/* 6 cards: 1 column on mobile, 2 on tablet, 3 on desktop (two even rows) */}
+        { }
         <ul className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {services.map((service) => (
             <li key={service._id} className="h-full">

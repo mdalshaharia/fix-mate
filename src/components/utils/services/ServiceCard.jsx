@@ -14,7 +14,7 @@ export default function ServiceCard({
 
   return (
     <article className="group flex h-full w-full flex-col overflow-hidden rounded-xl border border-border bg-card shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md">
-      {/* Fixed ratio keeps every card image the same height */}
+      { }
       <div className="relative flex aspect-[16/10] w-full items-center justify-center overflow-hidden bg-primary/5">
         {image ? (
           <Image
@@ -30,7 +30,7 @@ export default function ServiceCard({
       </div>
 
       <div className="flex flex-1 flex-col gap-3 p-4">
-        {/* Category & Price Row */}
+        { }
         <div className="flex items-center justify-between gap-2">
           <Badge
             variant="outline"
@@ -43,12 +43,12 @@ export default function ServiceCard({
           </p>
         </div>
 
-        {/* Two lines reserved so long titles never shift card height */}
+        { }
         <h3 className="line-clamp-2 min-h-10 text-sm font-bold leading-5 text-brand-primary-light">
           {title}
         </h3>
 
-        {/* Metadata Row */}
+        { }
         <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 text-xs text-muted-foreground">
           <p className="flex min-w-0 items-center gap-1.5">
             <ShieldCheck className="size-3.5 shrink-0 text-primary" />
@@ -70,7 +70,7 @@ export default function ServiceCard({
           )}
         </div>
 
-        {/* mt-auto pins the action button to the bottom across uneven cards */}
+        { }
         <div className="mt-auto pt-2">
           <Button
             asChild

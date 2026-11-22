@@ -48,7 +48,7 @@ const isSessionError = (message = "") =>
   message.includes("session-expired") || message.includes("Unauthorized");
 
 const toastError = (message) => {
-  if (isSessionError(message)) return; // handleExpiredSession already toasts + redirects
+  if (isSessionError(message)) return;
   toast.error(message);
 };
 
@@ -59,7 +59,6 @@ const SUCCESS_MESSAGE = {
   completed: "Job marked as completed",
 };
 
-// Only the buttons that are valid for the current status
 function RequestActions({ booking, busy, onUpdate, onComplete }) {
   switch (booking.status) {
     case "requested":
@@ -94,7 +93,7 @@ function RequestActions({ booking, busy, onUpdate, onComplete }) {
     case "completed":
       return <PaymentBadge paymentStatus={booking.paymentStatus} />;
     default:
-      return <span className="text-muted-foreground">—</span>; // rejected, cancelled
+      return <span className="text-muted-foreground">—</span>;
   }
 }
 
@@ -122,7 +121,6 @@ export default function ManageRequests() {
   const [amountError, setAmountError] = useState("");
   const [saving, setSaving] = useState(false);
 
-  // Filtering happens on the server; `ignore` drops answers from outdated requests
   useEffect(() => {
     let ignore = false;
     const query = status === "all" ? "" : `?status=${status}`;
@@ -161,7 +159,6 @@ export default function ManageRequests() {
     setStatus(value);
   }
 
-  // Returns true on success
   async function updateStatus(booking, nextStatus, finalAmount) {
     setBusyId(booking._id);
     try {
@@ -180,7 +177,7 @@ export default function ManageRequests() {
       return true;
     } catch (err) {
       toastError(err.message);
-      reload(); // the list may be out of date (e.g. the customer just cancelled)
+      reload();
       return false;
     } finally {
       setBusyId(null);
@@ -189,7 +186,7 @@ export default function ManageRequests() {
 
   function openCompleteModal(booking) {
     setCompleteTarget(booking);
-    setAmount(String(booking.basePrice)); // pre-filled with the base price
+    setAmount(String(booking.basePrice));
     setAmountError("");
   }
 
@@ -205,14 +202,14 @@ export default function ManageRequests() {
     setSaving(true);
     const ok = await updateStatus(completeTarget, "completed", value);
     setSaving(false);
-    if (ok) setCompleteTarget(null); // keep the dialog open on failure so the user can retry
+    if (ok) setCompleteTarget(null);
   }
 
   const actionProps = { onUpdate: updateStatus, onComplete: openCompleteModal };
 
   return (
     <>
-      {/* Status filter */}
+      { }
       <div className="mb-4 flex flex-wrap gap-2" role="group" aria-label="Filter by status">
         {FILTERS.map((filter) => (
           <button
@@ -248,7 +245,7 @@ export default function ManageRequests() {
         </div>
       ) : (
         <>
-          {/* Table: wide screens (it has many columns) */}
+          { }
           <div className="hidden overflow-hidden rounded-xl border bg-card xl:block">
             <Table>
               <TableHeader>
@@ -284,7 +281,7 @@ export default function ManageRequests() {
             </Table>
           </div>
 
-          {/* Cards: mobile, tablet and small laptops */}
+          { }
           <div className="space-y-3 xl:hidden">
             {bookings.map((b) => (
               <article key={b._id} className="space-y-3 rounded-xl border bg-card p-4">
@@ -319,7 +316,7 @@ export default function ManageRequests() {
         </>
       )}
 
-      {/* Mark completed: final amount */}
+      { }
       <Dialog
         open={!!completeTarget}
         onOpenChange={(open) => {

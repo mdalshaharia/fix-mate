@@ -10,7 +10,6 @@ import {
   ListChecks,
 } from "lucide-react";
 
-// `end: true` means the link is active only on the exact path.
 export const MENU = {
   customer: [
     { label: "Overview", href: "/dashboard/customer", icon: LayoutDashboard, end: true },

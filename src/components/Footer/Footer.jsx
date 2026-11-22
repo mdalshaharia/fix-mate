@@ -7,7 +7,6 @@ import {
   XIcon,
 } from "@/components/layout/SocialIcons";
 
-// Edit the content here without touching the markup
 const TAGLINE = "Book verified technicians for fast, reliable repairs, and pay only after the job is done.";
 
 const QUICK_LINKS = [
@@ -16,7 +15,6 @@ const QUICK_LINKS = [
   { label: "About", href: "/about" },
 ];
 
-// `value` must match the category stored in MongoDB (same as lib/constants.js)
 const POPULAR_CATEGORIES = [
   { label: "Smartphone", value: "Smartphone" },
   { label: "Laptop & PC", value: "Laptop" },
@@ -45,18 +43,17 @@ function ColumnTitle({ children }) {
   return <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider">{children}</h3>;
 }
 
-// Computed once at build time (keeps prerendering deterministic under Next 16 cache components)
 const CURRENT_YEAR = new Date().getFullYear();
 
 export default function Footer() {
   return (
     <footer className="bg-brand-primary text-background">
       <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1.3fr]">
-        {/* Brand */}
+        { }
         <div className="space-y-4">
           <Link href="/" className="group flex items-center " aria-label="FixMate home">
             <span className='grid h-10 w-10 place-items-center rounded-xl transition-transform duration-200 group-hover:scale-105'>
-              {/* <Wrench className="h-5 w-5" /> */}
+              { }
               <Drill className="h-6 w-6 text-white"></Drill>
             </span>
             <span className='font-pacifico text-2xl font-normal tracking-wider text-white'>
@@ -66,7 +63,7 @@ export default function Footer() {
           <p className="max-w-xs text-sm leading-6 text-background/70">{TAGLINE}</p>
         </div>
 
-        {/* Quick links */}
+        { }
         <nav aria-label="Quick links">
           <ColumnTitle>Quick links</ColumnTitle>
           <ul className="space-y-3">
@@ -78,7 +75,7 @@ export default function Footer() {
           </ul>
         </nav>
 
-        {/* Popular categories */}
+        { }
         <nav aria-label="Popular categories">
           <ColumnTitle>Popular categories</ColumnTitle>
           <ul className="space-y-3">
@@ -92,7 +89,7 @@ export default function Footer() {
           </ul>
         </nav>
 
-        {/* Contact */}
+        { }
         <div>
           <ColumnTitle>Contact us</ColumnTitle>
           <address className="space-y-3 not-italic">
@@ -116,7 +113,7 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Bottom bar */}
+      { }
       <div className="border-t border-background/15">
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-4 py-6 sm:flex-row">
           <p className="text-xs text-background/60">

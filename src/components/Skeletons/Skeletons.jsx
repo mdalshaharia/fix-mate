@@ -1,6 +1,5 @@
 "use client";
 
-// import { Skeleton } from "@/components/ui/skeleton";
 import { Loader2 } from "lucide-react";
 import { Skeleton } from "../ui/skeleton";
 export function SkeletonCard() {
