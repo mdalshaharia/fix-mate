@@ -5,6 +5,8 @@ import { CheckCircle2, ClipboardList, Hammer } from "lucide-react";
 import { toast } from "sonner";
 import PageHeader from "@/components/utils/dashboard/PageHeader";
 import StatsCard from "@/components/utils/dashboard/StatsCard";
+import { ChartCard, DonutChart, MonthlyBarChart } from "@/components/dashboard/Charts";
+import { BOOKING_META, toSlices } from "@/components/utils/dashboard/chartTheme";
 import { authorizedFetch } from "@/lib/getTokenFromClient";
 
 export default function CustomerOverviewPage() {
@@ -30,6 +32,9 @@ export default function CustomerOverviewPage() {
         };
     }, []);
 
+    const loading = !stats;
+    const bookingSlices = toSlices(stats?.bookingsByStatus, "status", BOOKING_META);
+
     const cards = [
         { label: "Total Requests", value: stats?.totalRequests, icon: ClipboardList },
         { label: "Active Jobs", value: stats?.activeJobs, icon: Hammer },
@@ -41,8 +46,30 @@ export default function CustomerOverviewPage() {
             <PageHeader title="Overview" description="A quick look at your repair requests." />
             <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
                 {cards.map((card) => (
-                    <StatsCard key={card.label} {...card} loading={!stats} />
+                    <StatsCard key={card.label} {...card} loading={loading} />
                 ))}
+            </div>
+
+            <div className="mt-6 grid gap-6 lg:grid-cols-3">
+                <ChartCard
+                    className="lg:col-span-2"
+                    title="Spending"
+                    description="What you paid in the last 6 months."
+                    loading={loading}
+                    empty={!loading && (stats?.spendingByMonth ?? []).every((point) => !point.value)}
+                    emptyText="No payments yet"
+                >
+                    <MonthlyBarChart data={stats?.spendingByMonth} label="Spent" money />
+                </ChartCard>
+
+                <ChartCard
+                    title="My requests"
+                    loading={loading}
+                    empty={!loading && bookingSlices.length === 0}
+                    emptyText="No requests yet"
+                >
+                    <DonutChart slices={bookingSlices} />
+                </ChartCard>
             </div>
         </>
     );
