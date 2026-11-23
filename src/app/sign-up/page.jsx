@@ -17,6 +17,7 @@ import Navbar from "@/components/Navbar/Navbar";
 import { signUp, signIn } from "@/lib/auth-client";
 import { LoaderScreen } from "@/components/Skeletons";
 
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const passwordRules = pw => [{
   label: "At least 8 characters",
   ok: pw.length >= 8
@@ -69,6 +70,19 @@ function Register() {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const ResData = Object.fromEntries(formData.entries());
+    const email = String(ResData.email || "").trim();
+    if (!email) {
+      setErrors({
+        email: "Email is required."
+      });
+      return;
+    }
+    if (!EMAIL_RE.test(email)) {
+      setErrors({
+        email: "Please enter a valid email address."
+      });
+      return;
+    }
     if (!rules.every(r => r.ok)) {
       const msg = "Password must be at least 8 characters and contain an uppercase and a lowercase letter.";
       setErrors({
@@ -84,7 +98,7 @@ function Register() {
         error
       } = await signUp.email({
         name: ResData.name,
-        email: ResData.email,
+        email,
         password: ResData.password,
         role,
       });
@@ -151,7 +165,7 @@ function Register() {
                 </div>
                 <h1 className="text-3xl font-extrabold tracking-tight text-heading text-center">Create account</h1>
 
-                <form onSubmit={handleSubmit} className="mt-6 space-y-4">
+                <form onSubmit={handleSubmit} noValidate className="mt-6 space-y-4">
                     {}
                     <Field id="name" label="Full name" error={errors.name}>
                         <Input id="name" autoComplete="name" placeholder="Your full name" disabled={busy} aria-invalid={!!errors.name} className={inputCls} name="name" />
@@ -174,7 +188,7 @@ function Register() {
 
                     {}
                     <Field id="email" label="Email" error={errors.email}>
-                        <Input id="email" type="email" autoComplete="email" placeholder="you@email.com" disabled={busy} aria-invalid={!!errors.email} className={inputCls} name="email" />
+                        <Input id="email" type="email" autoComplete="email" placeholder="you@email.com" disabled={busy} aria-invalid={!!errors.email} className={inputCls} name="email" onChange={() => errors.email && setErrors(p => ({ ...p, email: undefined }))} />
                     </Field>
                     {}
                     <Field id="password" label="Password" error={errors.password}>
